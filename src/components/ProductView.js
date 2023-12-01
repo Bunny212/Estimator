@@ -199,11 +199,8 @@ function ProductView() {
   if (data) {
     console.log("this is fahad testing", data)
   }
-  if (error) return
-  {
-    <p>Error: {error?.message}</p>;
-    // navigate('/');
-  }
+  if (error) return <p>Error: {error?.message}</p>;
+ 
 
   const invoices = data?.invoiceestimator_view;
 
