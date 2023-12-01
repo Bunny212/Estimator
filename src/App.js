@@ -153,9 +153,6 @@ const router = createBrowserRouter(
   ]
   ) 
 )   
-
-
-
 // localStorage.removeItem('token');
 
 function App() {
