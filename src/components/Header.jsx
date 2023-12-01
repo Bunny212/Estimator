@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import {  NavLink } from 'react-router-dom'
 import Logo from '../Assets/cycleWaalylogo.png'
-import { useMediaQuery } from 'react-responsive';
+// import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from "react-router-dom";
 
 function Header() {
@@ -53,7 +53,7 @@ function Header() {
                         <button onClick={handleClick}>Invoice Estimator </button>
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                        <a className="text-sm font-semibold leading-6 text-gray-900">
                             {/* Log in */}
                             {/* <span aria-hidden="true">&rarr;</span> */}
                         </a>
