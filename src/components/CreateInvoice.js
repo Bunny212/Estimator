@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/react-hooks';
 import Modal from 'react-modal';
 import { useParams } from 'react-router-dom';
 import { Button } from 'flowbite-react';
-import DataTable from 'react-data-table-component';
+
 
 
 
