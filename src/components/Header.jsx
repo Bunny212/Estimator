@@ -23,7 +23,7 @@ function Header() {
 
     return (
         <div className='shadow-md p-4 my-6 '>
-            <a href="#" className="sm:hidden">
+            <a  className="sm:hidden">
                 {/* <span className="sr-only">Your Company</span> */}
                 <img className="h-8 w-auto mx-auto " src={Logo} alt="" />
             </a>

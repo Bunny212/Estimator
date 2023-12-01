@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
-function Estimatemake() {
-  return (
-    <div>Estimatemake</div>
-  )
-}
+// function Estimatemake() {
+//   return (
+//     <div>Estimatemake</div>
+//   )
+// }
 
-export default Estimatemake
+// export default Estimatemake

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { GET_ALL_PRODUCT, CREATE_INVOICE_MUTATION, EDIT_INVOICE_ESTIMATOR_MUTATION, YOUR_QUERY } from './GraphQlApi/mutations';
 import { useQuery } from '@apollo/react-hooks';
@@ -58,21 +58,21 @@ const CreateInvoice = () => {
 
 
 
-    const [selectedRowsData, setSelectedRowsData] = useState([]);
+    // const [selectedRowsData, setSelectedRowsData] = useState([]);
 
-    const [rowDetails, setRowDetails] = useState({});
+    const [rowDetails] = useState({});
 
 
     const [searchTerm, setSearchTerm] = useState('');
     const [pageSize, setPageSize] = useState(10);
 
     console.log("this is row data:::::", rowDetails)
-    const [productidclick, setProductIdClick] = useState(2);
+    // const [productidclick, setProductIdClick] = useState(2);
     // const [selectedProductIds, setSelectedProductIds] = useState([]);
     const [selectedProductIds, setSelectedProductIds] = useState([]);
     const [productQty, setProductQty] = useState([1])
     const [selectedOption, setSelectedOption] = useState('default');
-    const [modalData, setModalData] = useState();
+    // const [modalData, setModalData] = useState();
     const [editReturn, setEditReturn] = useState();
     const [CreateEstimate] = useMutation(CREATE_INVOICE_MUTATION);
     const [EditEstimate] = useMutation(EDIT_INVOICE_ESTIMATOR_MUTATION);
@@ -172,7 +172,7 @@ const CreateInvoice = () => {
 
     // const invoice_data = modalData?.invoIceEstimator?.invoice_estimator?.invoice_data;
     // console.log('hello', modalData?.invoIceEstimator?.invoice_estimator?.invoice_data);
-    const { loading, error, data, refetch } = useQuery(GET_ALL_PRODUCT, {
+    const {  error, data, refetch } = useQuery(GET_ALL_PRODUCT, {
         variables: {
             search: "",
             pageSize: 10,
@@ -180,6 +180,7 @@ const CreateInvoice = () => {
     });
 
 
+    
 
     if (error) return <p>Error: {error?.message}</p>;
 

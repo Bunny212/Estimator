@@ -4,7 +4,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
-import { Alert, Button } from 'flowbite-react';
+import {  Button } from 'flowbite-react';
 import DataTable from 'react-data-table-component';
 
 
@@ -36,20 +36,20 @@ customStyles.content['@media (max-width: 640px)'] = {
 function ProductView() {
 
 
-  const skeletonRows = Array.from({ length: 5 }).map((_, index) => (
-    <tr key={index}>
-      <td className="border-b border-gray-200">
-        <div className="animate-pulse flex space-x-4">
-          <div className="rounded-full bg-gray-300 h-12 w-12"></div>
-          <div className="flex-1 space-y-4 py-1">
-            <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-            <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-            <div className="h-4 bg-gray-300 rounded w-4/6"></div>
-          </div>
-        </div>
-      </td>
-    </tr>
-  ));
+  // const skeletonRows = Array.from({ length: 5 }).map((_, index) => (
+  //   <tr key={index}>
+  //     <td className="border-b border-gray-200">
+  //       <div className="animate-pulse flex space-x-4">
+  //         <div className="rounded-full bg-gray-300 h-12 w-12"></div>
+  //         <div className="flex-1 space-y-4 py-1">
+  //           <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+  //           <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+  //           <div className="h-4 bg-gray-300 rounded w-4/6"></div>
+  //         </div>
+  //       </div>
+  //     </td>
+  //   </tr>
+  // ));
 
 
 
@@ -57,11 +57,11 @@ function ProductView() {
   useEffect(() => {
     refetch();
   });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [viewdata, SetViewData] = useState('No Response yet')
-  const [deletedata, setDeleteData] = useState('No Response yet');
-  const [placeOrder, setPlaceOrder] = useState("oder not place yet ")
+  const [ setDeleteData] = useState('No Response yet');
+  // const [placeOrder, setPlaceOrder] = useState("oder not place yet ")
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
