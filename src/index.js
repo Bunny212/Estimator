@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.jsdelivr.net/npm/react-data-table-component/dist/index.css"
+/>
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
