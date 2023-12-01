@@ -23,18 +23,18 @@ function Header() {
 
     return (
         <div className='shadow-md p-4 my-6 '>
-            <a  className="sm:hidden">
+            <span  className="sm:hidden">
                 {/* <span className="sr-only">Your Company</span> */}
                 <img className="h-8 w-auto mx-auto " src={Logo} alt="" />
-            </a>
+            </span>
 
             <header className="bg-dark  hidden sm:block ">
                 <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div className="flex lg:flex-1">
-                        <a href="#" className="-m-1.5 p-1.5">
+                        <span className="-m-1.5 p-1.5">
                             <span className="sr-only">Your Company</span>
                             <img className="h-8 w-auto" src={Logo} alt="" />
-                        </a>
+                        </span>
                     </div>
                     <div className="flex lg:hidden" onClick={() => SetNavbar(!Navbar)}>
                         <button type="button" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
@@ -53,10 +53,7 @@ function Header() {
                         <button onClick={handleClick}>Invoice Estimator </button>
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <a className="text-sm font-semibold leading-6 text-gray-900">
-                            {/* Log in */}
-                            {/* <span aria-hidden="true">&rarr;</span> */}
-                        </a>
+                        
                         <button onClick={logoutHandler}>Logout</button>
 
                     </div>
@@ -67,10 +64,10 @@ function Header() {
                             <div className="fixed inset-0 z-10"></div>
                             <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                                 <div className="flex items-center justify-between">
-                                    <a href="#" className="-m-1.5 p-1.5">
+                                    <span className="-m-1.5 p-1.5">
                                         <span className="sr-only">Your Company</span>
                                         <img className="h-8 w-auto" src={Logo} alt="" />
-                                    </a>
+                                    </span>
                                     <button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => SetNavbar(!Navbar)} >
                                         <span className="sr-only">Close menu</span>
                                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
