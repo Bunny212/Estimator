@@ -132,7 +132,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import CreateInvoice from './components/CreateInvoice';
-// import Estimatemake from './components/Estimatemake';
+import Estimatemake from './components/Estimatemake';
 import ProductView from './components/ProductView';
 import Signin from './components/Signin';
 import Layout from './components/Layout';
@@ -159,13 +159,13 @@ const router = createBrowserRouter(
 // localStorage.removeItem('token');
 
 function App() {
-const [token] = useState(localStorage.getItem('token'));
+const [token, setToken] = useState(localStorage.getItem('token'));
 
 
 // const TOKEN = token;
 
 const client = new ApolloClient({
-uri: 'https://cyclewalay.com/graphql',
+uri: 'https://luxury-babka-f6ce80.netlify.app/graphql',
 cache: new InMemoryCache(),
    headers: {
     authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : '',}
@@ -175,10 +175,10 @@ cache: new InMemoryCache(),
 
 useEffect(() => {
   if (token) {
-   
+    // Redirect to layout page if token exists
     router.navigate('/');
   } else {
- 
+    // Redirect to sign-in page if no token
     router.navigate('/signin');
   }
 }, [token]);
@@ -189,10 +189,10 @@ console.log("this is state", token)
 
   useEffect(() => {
     if (token) {
-     
+      // Redirect to layout page if token exists
       router.navigate('/');
     } else {
-   
+      // Redirect to sign-in page if no token
       router.navigate('/signin');
     }
   }, [token]);
