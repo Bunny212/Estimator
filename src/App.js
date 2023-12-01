@@ -132,7 +132,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import CreateInvoice from './components/CreateInvoice';
-import Estimatemake from './components/Estimatemake';
+// import Estimatemake from './components/Estimatemake';
 import ProductView from './components/ProductView';
 import Signin from './components/Signin';
 import Layout from './components/Layout';
@@ -159,7 +159,7 @@ const router = createBrowserRouter(
 // localStorage.removeItem('token');
 
 function App() {
-const [token, setToken] = useState(localStorage.getItem('token'));
+const [token] = useState(localStorage.getItem('token'));
 
 
 // const TOKEN = token;
