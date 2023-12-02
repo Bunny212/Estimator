@@ -171,7 +171,7 @@ cache: new InMemoryCache(),
     authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : '',}
 })
 
-setToken(localStorage.getItem('token'))
+// setToken(localStorage.getItem('token'))
 
 useEffect(() => {
   if (token) {
