@@ -153,11 +153,14 @@ const router = createBrowserRouter(
   ]
   ) 
 )   
+
+
+
 // localStorage.removeItem('token');
 
 function App() {
-const [token] = useState(localStorage.getItem('token'));
-
+const [token, setToken] = useState(localStorage.getItem('token'));
+setToken(localStorage.getItem('token'))
 
 // const TOKEN = token;
 
