@@ -160,7 +160,7 @@ const router = createBrowserRouter(
 
 function App() {
 const [token, setToken] = useState(localStorage.getItem('token'));
-setToken(localStorage.getItem('token'))
+
 
 // const TOKEN = token;
 
