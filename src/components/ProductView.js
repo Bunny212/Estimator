@@ -381,7 +381,6 @@ function ProductView() {
               >
                 Download Pdf
               </Button>
-            </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
               <div>
@@ -394,6 +393,8 @@ function ProductView() {
                 total Amount :{''}{viewResponse?.discount_value_with_currency}
               </div>
             </div>
+            </div>
+
           </div>
         }
       </Modal>
