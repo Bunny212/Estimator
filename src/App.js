@@ -166,6 +166,7 @@ const [token] = useState(localStorage.getItem('token'));
 
 const client = new ApolloClient({
 uri: 'https://cyclewalay.com/graphql',
+// uri: 'https://cyclewalay.com/graphql',
 cache: new InMemoryCache(),
    headers: {
     authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : '',}

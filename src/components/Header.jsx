@@ -22,7 +22,7 @@ function Header() {
 
 
     return (
-        <div className='shadow-md p-4 my-6 '>
+        <div className='shadow-md p-1 my-0 '>
             <span  className="sm:hidden">
                 {/* <span className="sr-only">Your Company</span> */}
                 <img className="h-8 w-auto mx-auto " src={Logo} alt="" />
@@ -45,12 +45,12 @@ function Header() {
                         </button>
                     </div>
                     <div className="hidden lg:flex lg:gap-x-12">
-                        <NavLink className="text-sm font-semibold leading-6 text-gray-900"
+                        <NavLink className="text-sm font-semibold leading-6 text-gray-900 p-2 shadow-md"
                             to="/ProductView"
                         > Invoice Estimator List
                         </NavLink>
 
-                        <button onClick={handleClick}>Invoice Estimator </button>
+                        <button onClick={handleClick} className='p-2 shadow-md'>Invoice Estimator </button>
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                         

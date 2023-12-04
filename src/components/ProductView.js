@@ -8,10 +8,6 @@ import {  Button } from 'flowbite-react';
 import DataTable from 'react-data-table-component';
 
 
-
-
-
-
 const customStyles = {
   content: {
     top: '50%',
@@ -20,17 +16,16 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: '50%', // Adjust width for mobile feel
     maxWidth: '100%', // Set a maximum width for larger screens
     // borderRadius: '8px', // Rounded corners
-    // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
     backgroundColor: '#fff', // White background color
   },
 
 };
 
 customStyles.content['@media (max-width: 640px)'] = {
-  width: '95%', // Adjust width for mobile screens
+  width: '100%', // Adjust width for mobile screens
 };
 
 function ProductView() {
@@ -257,50 +252,23 @@ function ProductView() {
     {
       name: 'Actions',
       cell: row => (
-        <div>
-          <button onClick={() => { ViewHandler(row.estimate_id) }}>View</button>
-          <button onClick={() => console.log(row.estimate_id)}>
+        <div >
+
+          
+          <button className='p-2 shadow-md text-xs  ' onClick={() => { ViewHandler(row.estimate_id) }}>View</button>
+          <button className='p-2 shadow-md' onClick={() => console.log(row.estimate_id)}>
             <Link to={`/CreateInvoice/${row.estimate_id}`}>
               Edit
             </Link>
           </button>
           {/* Add other action buttons */}
-          <button onClick={() => { DeleteHandler(row.estimate_id) }}>Delete</button>
+          <button className='p-2 shadow-md' onClick={() => { DeleteHandler(row.estimate_id) }}>Delete</button>
           {/* <button onClick={() => { ViewHandler(row.estimate_id) }}>View</button> */}
-          <button onClick={() => { OrderHanlder(row.estimate_id) }}>place Order</button>
-
-
-
+          <button className='p-2 shadow-md' onClick={() => { OrderHanlder(row.estimate_id) }}>Order</button>
         </div>
 
-        //         <div className="flex sm:flex-col  sm:space-x-2">
-        //   <button
-        //     onClick={() => { ViewHandler(row.estimate_id) }}
-        //     className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mb-2 sm:mb-0 w-full sm:w-auto"
-        //   >
-        //     View
-        //   </button>
-        //   <button
-        //     onClick={() => console.log(row.estimate_id)}
-        //     className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded mb-2 sm:mb-0 w-full sm:w-auto"
-        //   >
-        //     <Link to={`/CreateInvoice/${row.estimate_id}`} className="text-white">
-        //       Edit
-        //     </Link>
-        //   </button>
-        //   <button
-        //     onClick={() => { DeleteHandler(row.estimate_id) }}
-        //     className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded mb-2 sm:mb-0 w-full sm:w-auto"
-        //   >
-        //     Delete
-        //   </button>
-        //   <button
-        //     onClick={() => { OrderHanlder(row.estimate_id) }}
-        //     className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded mb-2 sm:mb-0 w-full sm:w-auto"
-        //   >
-        //     Place Order
-        //   </button>
-        // </div>
+
+
 
 
       ),
