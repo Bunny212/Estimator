@@ -65,6 +65,7 @@ const CreateInvoice = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [pageSize, setPageSize] = useState(10);
+    const [showform, setShowform] = useState(false);
 
     console.log("this is row data:::::", rowDetails)
     // const [productidclick, setProductIdClick] = useState(2);
@@ -303,97 +304,123 @@ const CreateInvoice = () => {
                 </Modal>
             </div>
 
+            <div className='flex items-center justify-between p-2 lg:px-6 lg:py-6 mt-4 p-2 bg-gray-50' onClick={() => { setShowform(!showform) }}>
+                
+                <div className='text-sm'>Add Information</div>
+                <div>
+                {
+                    showform === true ?
+
+                        <svg class="w-2 h-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7" />
+                        </svg>
+
+                        : <svg class="w-2 h-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1" />
+                        </svg>
+                }
+
+                </div>
+                
+            </div>
 
 
             <div className="lg:px-6 lg:py-12 mb-40 py-6">
                 <form onSubmit={formik.handleSubmit}>
-                    <div className="grid md:grid-cols-2 md:gap-6">
-                        <div className="relative z-0 w-full mb-2 group">
-                            <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white sm:text-xs">Discount Amount:</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                name="DiscountAmount"
-                                type="number"
-                                onChange={formik.handleChange}
-                                value={formik?.values?.DiscountAmount} placeholder="Discount Amount" required />
-                        </div>
-                        <div className="relative z-0 w-full mb-2 group">
-                            <label for="DiscountType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Discount Type</label>
-                            {/* <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required /> */}
-                            <select
-                                id="DiscountType"
-                                name="DiscountType"
-                                onChange={formik.handleChange}
-                                value={formik?.values?.DiscountType}
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            >
-                                <option key="Fix" value="Fix" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >Fix</option>
-                                <option key="percent" value="percent" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >Percentage</option>
-                            </select>
-                        </div>
-                    </div>
+                    {
+                        showform === true ? (
+                            <div>
+                                <div className="grid md:grid-cols-2 md:gap-6">
+                                    <div className="relative z-0 w-full mb-2 group">
+                                        <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white sm:text-xs">Discount Amount:</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            name="DiscountAmount"
+                                            type="number"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.DiscountAmount} placeholder="Discount Amount" required />
+                                    </div>
+                                    <div className="relative z-0 w-full mb-2 group">
+                                        <label for="DiscountType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Discount Type</label>
+                                        {/* <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required /> */}
+                                        <select
+                                            id="DiscountType"
+                                            name="DiscountType"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.DiscountType}
+                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        >
+                                            <option key="Fix" value="Fix" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >Fix</option>
+                                            <option key="percent" value="percent" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >Percentage</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                    <div className="grid md:grid-cols-2 md:gap-6">
-                        <div className="relative z-0 w-full mb-2 group">
-                            <label for="FName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name:</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                id="FName"
-                                name="FName"
-                                type="text"
-                                onChange={formik.handleChange}
-                                value={formik?.values?.FName} required />
-                        </div>
-                        <div className="relative z-0 w-full mb-2 group">
-                            <label for="LName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name::</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                id="LName"
-                                name="LName"
-                                type="text"
-                                onChange={formik.handleChange}
-                                value={formik?.values?.LName}
-                                required />
-                        </div>
+                                <div className="grid md:grid-cols-2 md:gap-6">
+                                    <div className="relative z-0 w-full mb-2 group">
+                                        <label for="FName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name:</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            id="FName"
+                                            name="FName"
+                                            type="text"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.FName} required />
+                                    </div>
+                                    <div className="relative z-0 w-full mb-2 group">
+                                        <label for="LName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name::</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            id="LName"
+                                            name="LName"
+                                            type="text"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.LName}
+                                            required />
+                                    </div>
 
-                    </div>
-                    <div className="grid md:grid-cols-2 md:gap-6">
-                        <div className="relative z-0 w-full mb-2 group">
-                            <label for="CAddress" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Address:</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                id="CAddress"
-                                name="CAddress"
-                                type="text"
-                                onChange={formik.handleChange}
-                                value={formik?.values?.CAddress} required />
-                        </div>
-                        <div className="relative z-0 w-full mb-2 group">
-                            <label for="CNumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Number:</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                id="CNumber"
-                                name="CNumber"
-                                onChange={formik.handleChange}
-                                value={formik?.values?.CNumber}
-                                required />
-                        </div>
-                    </div>
-                    <div className="grid md:grid-cols-2 md:gap-6">
-                        <div className="relative z-0 w-full mb-2 group">
-                            <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Email:</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                id="email"
-                                name="email"
-                                type="email"
-                                onChange={formik.handleChange}
-                                value={formik?.values?.email} required />
-                        </div>
-                        <div className="relative z-0 w-full mb-2 group">
-                            <label for="Coupon" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Coupon Code:</label>
-                            <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                id="Coupon"
-                                name="Coupon"
-                                type="text"
-                                onChange={formik.handleChange}
-                                value={formik?.values?.Coupon} />
-                        </div>
-                    </div>
+                                </div>
+                                <div className="grid md:grid-cols-2 md:gap-6">
+                                    <div className="relative z-0 w-full mb-2 group">
+                                        <label for="CAddress" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Address:</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            id="CAddress"
+                                            name="CAddress"
+                                            type="text"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.CAddress} required />
+                                    </div>
+                                    <div className="relative z-0 w-full mb-2 group">
+                                        <label for="CNumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Number:</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            id="CNumber"
+                                            name="CNumber"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.CNumber}
+                                            required />
+                                    </div>
+                                </div>
+                                <div className="grid md:grid-cols-2 md:gap-6">
+                                    <div className="relative z-0 w-full mb-2 group">
+                                        <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Email:</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            id="email"
+                                            name="email"
+                                            type="email"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.email} required />
+                                    </div>
+                                    <div className="relative z-0 w-full mb-2 group">
+                                        <label for="Coupon" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Coupon Code:</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            id="Coupon"
+                                            name="Coupon"
+                                            type="text"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.Coupon} />
+                                    </div>
+                                </div>
+                            </div>
+
+                        ) : ''
+                    }
 
 
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -420,8 +447,6 @@ const CreateInvoice = () => {
                         </select>
 
                     </div>
-
-
 
                     <div className='hidden sm:block'>
                         <div className=" relative overflow-x-auto  sm:rounded-lg  py-3 ">
@@ -478,7 +503,7 @@ const CreateInvoice = () => {
                                                     const updatedQty = [...productQty];
                                                     updatedQty[product.id] = e.target.value;
                                                     setProductQty(updatedQty);
-                                                    
+
                                                 }}
 
                                             />
@@ -493,7 +518,7 @@ const CreateInvoice = () => {
                                         <th scope="col" className="px-6 py-3">
 
                                             <select
-                                            className='w-18 text-center h-8 p-1'
+                                                className='w-18 text-center h-8 p-1'
                                                 onChange={(event) => {
                                                     const updatedOptions = {
                                                         ...selectedOption,
@@ -520,74 +545,77 @@ const CreateInvoice = () => {
                         <div className=" rid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {products.map(product => (
                                 <div key={product.id} className="bg-white shadow-md rounded-md p-4 mb-2">
-                                   
-                                   <label htmlFor={`checkbox_${product.id}`} className="flex items-center text-xs">
-                                            <input
-                                                type="checkbox"
-                                                id={`checkbox_${product.id}`}
-                                                className=" text-xs"
-                                                onChange={() => handleProductSelection(product.id, selectedOption[product.id])}
-                                                checked={selectedProductIds.includes(product.id)}
-                                            />
-                                        </label>
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex-1">
-                                            <h3 className="text-xs font-semibold ">{product.name}</h3>
-                                            <p className='text-xs'>Price: {product.price_range.minimum_price.regular_price.value}</p>
-                                        </div>
-                                        <img
-                                            src={product.image.url}
-                                            alt={product.name}
-                                            className="w-16 h-16 object-cover rounded"
-                                        />
-                                    </div>
                                     <div>
-                                    <div className="mt-1 flex  justify-between ">
-                                        <div className="mt-1 flex  justify-between  items-center justify-center" >
-                                        <label htmlFor={`quantity_${product.id}`} className="block mb-1 text-xs mr-2">Qty:</label>
-                                        <input
-                                            type="number"
-                                            id={`quantity_${product.id}`}
-                                            className="border border-gray-300 rounded-md w-12 h-6 justify-between items-center justify-center"
-                                            value={productQty[product.id]}
-                                            onChange={(e) => {
-                                                const updatedQty = [...productQty];
-                                                updatedQty[product.id] = e.target.value;
-                                                setProductQty(updatedQty);
-                                            }}
-                                        />
-                                        </div>
-                                        <div className="mt-1 flex  justify-between items-center justify-center">
 
-                                        <label htmlFor={`fitting_${product.id}`} className="block mb-1 text-xs mr-2">Fitting Charges:</label>
-                                        <select
-                                            id={`fitting_${product.id}`}
-                                            className="border border-gray-300 rounded-md text-xs w-16 h-6 p-1"
-                                            value={selectedOption[product.id]}
-                                            onChange={(event) => {
-                                                const updatedOptions = {
-                                                    ...selectedOption,
-                                                    [product.id]: event.target.value
-                                                };
-                                                setSelectedOption(updatedOptions);
-                                            }}
-                                        >
-                                            <option value="no">No</option>
-                                            <option value="yes">Yes</option>
-                                        </select>
+
+                                        <div className="flex items-center justify-between">
+                                            <label htmlFor={`checkbox_${product.id}`} className="flex items-center text-xs mr-2">
+                                                <input
+                                                    type="checkbox"
+                                                    id={`checkbox_${product.id}`}
+                                                    className=" text-xs"
+                                                    onChange={() => handleProductSelection(product.id, selectedOption[product.id])}
+                                                    checked={selectedProductIds.includes(product.id)}
+                                                />
+                                            </label>
+                                            <div className="flex-1">
+                                                <h3 className="text-xs font-semibold ">{product.name}</h3>
+                                                <p className='text-xs'>Price: {product.price_range.minimum_price.regular_price.value}</p>
+                                            </div>
+                                            <img
+                                                src={product.image.url}
+                                                alt={product.name}
+                                                className="w-16 h-16 object-cover rounded"
+                                            />
                                         </div>
+
                                     </div>
+
+
+
+                                    <div>
+                                        <div className="mt-1 flex  justify-between ">
+                                            <div className="mt-1 flex  justify-between  items-center justify-center" >
+                                                <label htmlFor={`quantity_${product.id}`} className="block mb-1 text-xs mr-2">Qty:</label>
+                                                <input
+                                                    type="number"
+                                                    id={`quantity_${product.id}`}
+                                                    className="border border-gray-300 rounded-md w-12 h-6 justify-between items-center justify-center"
+                                                    value={productQty[product.id]}
+                                                    onChange={(e) => {
+                                                        const updatedQty = [...productQty];
+                                                        updatedQty[product.id] = e.target.value;
+                                                        setProductQty(updatedQty);
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="mt-1 flex  justify-between items-center justify-center">
+
+                                                {/* <label htmlFor={`fitting_${product.id}`} className="block mb-1 text-xs mr-2">Fitting Charges:</label> */}
+                                                <select
+                                                    id={`fitting_${product.id}`}
+                                                    className="border border-gray-300 rounded-md text-xs w-30 h-8 p-1"
+                                                    value={selectedOption[product.id]}
+                                                    onChange={(event) => {
+                                                        const updatedOptions = {
+                                                            ...selectedOption,
+                                                            [product.id]: event.target.value
+                                                        };
+                                                        setSelectedOption(updatedOptions);
+                                                    }}
+                                                >
+                                                    <option value="no">Fitting Charges</option>
+                                                    <option value="yes">Yes</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
 
                     </div>
-
-
-
                     <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:text-xs" >Submit</button>
-
                 </form>
                 <>
 

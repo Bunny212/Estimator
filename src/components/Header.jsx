@@ -22,13 +22,13 @@ function Header() {
 
 
     return (
-        <div className='shadow-md p-1 my-0 '>
+        <div className=' p-1 my-0 '>
             <span  className="sm:hidden">
                 {/* <span className="sr-only">Your Company</span> */}
                 <img className="h-8 w-auto mx-auto " src={Logo} alt="" />
             </span>
 
-            <header className="bg-dark  hidden sm:block ">
+            <header className="bg-dark  shadow-md hidden sm:block ">
                 <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div className="flex lg:flex-1">
                         <span className="-m-1.5 p-1.5">
