@@ -18,15 +18,17 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     maxWidth: '100%', // Set a maximum width for larger screens
     // borderRadius: '8px', // Rounded corners
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
-    backgroundColor: '#fff', // White background color
+    // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
+    // backgroundColor: '#fff', // White background color
+    // padding:'5%'
+    padding:'2%'
   },
 
 };
 
-customStyles.content['@media (max-width: 640px)'] = {
-  width: '100%', // Adjust width for mobile screens
-};
+// customStyles.content['@media (max-width: 640px)'] = {
+//   width: '100%', // Adjust width for mobile screens
+// };
 
 function ProductView() {
 
@@ -387,29 +389,29 @@ function ProductView() {
         contentLabel="Example Modal"
       >
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <h6 ref={(_subtitle) => (subtitle = _subtitle)}>Your Invoice Estimator Pdf is Generated. Download Your Invoice Pdf.</h6>
-            <svg onClick={closeModal} class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <h6 className='sm-text-xs text-sm mb-2' ref={(_subtitle) => (subtitle = _subtitle)}>Your Invoice Estimator Pdf is Generated. Download Your Invoice Pdf.</h6>
+            <svg onClick={closeModal} class="sm-w-4 sm-h-4 w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
           </svg>
 
         </div>
         <div className="relative overflow-x-auto">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <table className="w-full text-xs text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="sm-px-2 sm-py-2  px-4 py-4 text-xs">
                   Name
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="sm-px-2 sm-py-2  px-4 py-4 text-xs">
                   price
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="sm-px-2 sm-py-2  px-4 py-4 text-xs">
                   Quantity
                 </th>
                 {/* <th scope="col" className="px-6 py-3">
                                         
                                     </th> */}
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="sm-px-2 sm-py-2  px-4 py-4 text-xs">
                   Total
                 </th>
               </tr>
@@ -418,13 +420,13 @@ function ProductView() {
               {viewResponse?.invoice_data.map((invoiceView) => (
 
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <td className="px-6 py-4 font-medium text-gray-900  dark:text-white">
+                  <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900  dark:text-white">
                     {invoiceView?.name}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.price}</td>
-                  <td className="px-6 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.quantity}</td>
+                  <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.price}</td>
+                  <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.quantity}</td>
                   {/* <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >{invoicedetails?.price}</td> */}
-                  <td className="px-6 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.total_product_price}</td>
+                  <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.total_product_price}</td>
                 </tr>
 
               ))
@@ -435,26 +437,26 @@ function ProductView() {
         </div>
         {
 
-          <div style={{ display: '', justifyContent: 'space-between' }}>
+          <div >
 
-            <div>
+            <div style={{ display: 'flex',flexDirection:'row',  justifyContent: 'space-between' }}>
               <Button
-                style={{ backgroundColor: 'blue', padding: 2, color: '#ffff', marginTop: 20 }}
+                style={{ backgroundColor: 'blue', padding: 2, color: '#ffff', marginTop: 10 }}
                 href={viewResponse?.invoice_pdf}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Download Pdf
+              Pdf
               </Button>
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
-              <div>
+              <div className='text-xs'>
                 Amount  :{''}{viewResponse?.total_with_currency}
               </div>
-              <div>
+              <div className='text-xs'>
                 Discount :{''}{viewResponse?.customer_discount_with_currency}
               </div>
-              <div>
+              <div className='text-xs'>
                 total Amount :{''}{viewResponse?.discount_value_with_currency}
               </div>
             </div>

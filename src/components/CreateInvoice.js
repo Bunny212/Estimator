@@ -24,13 +24,14 @@ const customStyles = {
         // borderRadius: '8px', // Rounded corners
         // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
         backgroundColor: '#fff', // White background color
+        padding:'2%'
     },
 
 };
 
-customStyles.content['@media (max-width: 640px)'] = {
-    width: '95%', // Adjust width for mobile screens
-};
+// customStyles.content['@media (max-width: 640px)'] = {
+//     width: '95%', // Adjust width for mobile screens
+// };
 
 
 
@@ -226,9 +227,9 @@ const CreateInvoice = () => {
                     style={customStyles}
                     contentLabel="Example Modal"
                 >
-                    <div className='text-sm' style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
-                        <h6 ref={(_subtitle) => (subtitle = _subtitle)}>Your Invoice Estimator Pdf is Generated. Download Your Invoice Pdf.</h6>
-                        <svg onClick={closeModal} class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <div className='sm-text-xs text-sm' style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
+                        <h6 className='sm-text-xs text-sm' ref={(_subtitle) => (subtitle = _subtitle)}>Your Invoice Estimator Pdf is Generated. Download Your Invoice Pdf.</h6>
+                        <svg onClick={closeModal} class=" sm-w-4 sm-h-4 w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
                         </svg>
 
@@ -238,19 +239,19 @@ const CreateInvoice = () => {
                         <table className="w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr  >
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-2 py-2 text-xs">
                                         Name
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Fitting Charges
+                                    <th scope="col" className="px-2 py-2 text-xs">
+                                        Fitting
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Quantity
+                                    <th scope="col" className="px-2 py-2 text-xs">
+                                        QTY
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Product Price
+                                    <th scope="col" className="px-2 py-2 text-xs">
+                                        Price
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-2 py-2 text-xs">
                                         Total
                                     </th>
                                 </tr>
@@ -259,13 +260,13 @@ const CreateInvoice = () => {
                                 {<>
                                     {invoiceData?.map((invoicedetails, index) => (
                                         <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white">
+                                            <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white text-xs">
                                                 {invoicedetails?.name}
                                             </td>
-                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.custom_option}</td>
-                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.quantity}</td>
-                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.price}</td>
-                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.total_product_price}</td>
+                                            <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white text-xs" >{invoicedetails?.custom_option}</td>
+                                            <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white text-xs" >{invoicedetails?.quantity}</td>
+                                            <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white text-xs" >{invoicedetails?.price}</td>
+                                            <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white text-xs" >{invoicedetails?.total_product_price}</td>
                                         </tr>
                                     ))}
                                 </>
@@ -275,7 +276,7 @@ const CreateInvoice = () => {
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div>
                                 <Button
-                                    style={{ backgroundColor: 'blue', padding: 2, color: '#ffff', marginTop: 20 }}
+                                    style={{ backgroundColor: 'blue', padding: 2, color: '#ffff', marginTop: 10 }}
                                     href={editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.invoice_pdf}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -614,7 +615,7 @@ const CreateInvoice = () => {
                 <>
 
                 {/* {"producttttttttttttttttt", data} */}
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col  mt-4 items-center">
 
                         <span class="text-sm text-gray-700 dark:text-gray-400">
                             Current page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.current_page}</span> 
@@ -624,10 +625,10 @@ const CreateInvoice = () => {
 
                         {/* {console.log("productttttttttttttttt", data?.products?.total_count)} */}
                         <div class="inline-flex mt-2 xs:mt-0">
-                            <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page - 1) }} disabled={currentPage === 1} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page - 1) }} disabled={currentPage === 1} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 rounded-s dark:bg-gray-800 dark:hover:text-white">
                                 Prev
                             </button>
-                            <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page + 1) }} disabled={currentPage >= data?.products?.page_info?.total_pages} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page + 1) }} disabled={currentPage >= data?.products?.page_info?.total_pages} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 border-0 border-s border-gray-700 rounded-e  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ">
                                 Next
                             </button>
                         </div>
