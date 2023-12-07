@@ -301,7 +301,7 @@ function ProductView() {
       name: 'Actions',
       cell: row => (
 
-        row.order_status == "Not Placed" ? (
+        row.order_status === "Not Placed" ? (
 
           <div>
           <button
