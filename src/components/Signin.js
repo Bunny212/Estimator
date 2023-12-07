@@ -36,7 +36,7 @@ const Signin = () => {
 
   return (
     <div className='sm-shadow-md mx-6 px-6 py-6 my-6'>
-      <div className="flex min-h-full  flex-col justify-center  lg:px-8">
+      <div className="flex min-h-full  flex-col justify-center lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-10 w-auto" src={logo} alt="Your Company" />
         </div>

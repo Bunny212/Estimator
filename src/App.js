@@ -148,6 +148,7 @@ const router = createBrowserRouter(
       <Route path='' element={<CreateInvoice />} />
       <Route path='ProductView' element={<ProductView />} />
       <Route path='CreateInvoice/:id' element={<CreateInvoice />} />
+      <Route path="*" element={<Signin />} />
     </Route>, 
     <Route path="/signin" element={<Signin />} />
   ]

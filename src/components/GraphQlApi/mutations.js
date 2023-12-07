@@ -135,9 +135,43 @@ export const EDIT_INVOICE_ESTIMATOR_MUTATION = gql`
 // `;
 
 
+// export const GET_ALL_PRODUCT = gql`
+//   query Products($search: String, $pageSize: Int!) {
+//     products(search: $search, pageSize: $pageSize) {
+//       total_count
+//       items {
+//         id
+//         name
+//         sku
+//         url_key
+//         price_range {
+//           minimum_price {
+//             regular_price {
+//               value
+//               currency
+//             }
+//           }
+//         }
+//         stock_status
+//         image {
+//           url
+//         }
+//         page_info {
+//           current_page # Retrieve the current page number
+//           page_size # Retrieve the page size (number of items per page)
+//           total_pages # Retrieve the total number of pages
+//         }
+//       }
+//     }
+//   }
+// `;
+
+
+
+
 export const GET_ALL_PRODUCT = gql`
-  query Products($search: String, $pageSize: Int!) {
-    products(search: $search, pageSize: $pageSize) {
+  query Products($search: String, $pageSize: Int!, $currentPage:Int!) {
+    products(search: $search, pageSize: $pageSize , currentPage: $currentPage) {
       total_count
       items {
         id
@@ -157,10 +191,14 @@ export const GET_ALL_PRODUCT = gql`
           url
         }
       }
+      page_info {
+        current_page # Retrieve the current page number
+        page_size # Retrieve the page size (number of items per page)
+        total_pages # Retrieve the total number of pages
+      }
     }
   }
 `;
-
 
 
 

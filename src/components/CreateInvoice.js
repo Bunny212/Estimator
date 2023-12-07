@@ -77,6 +77,7 @@ const CreateInvoice = () => {
     const [editReturn, setEditReturn] = useState();
     const [CreateEstimate] = useMutation(CREATE_INVOICE_MUTATION);
     const [EditEstimate] = useMutation(EDIT_INVOICE_ESTIMATOR_MUTATION);
+    const [currentPage, setCurrentPage] = useState(4);
     // const [getViewData] = useMutation(INVOICEES_TIMATOR);
 
 
@@ -176,13 +177,13 @@ const CreateInvoice = () => {
     const { error, data, refetch } = useQuery(GET_ALL_PRODUCT, {
         variables: {
             search: "",
-            pageSize: 10,
+            pageSize: pageSize,
+            currentPage: currentPage,
         },
     });
-
-
-
-
+    if (data) {
+        console.log("this is filter data", data)
+    }
     if (error) return <p>Error: {error?.message}</p>;
 
     const products = data?.products?.items || [];
@@ -190,13 +191,14 @@ const CreateInvoice = () => {
     const handleSearchChange = (event) => {
         const term = event.target.value;
         setSearchTerm(term);
-        refetch({ search: term, pageSize });
+        refetch({ search: term, pageSize:pageSize });
     };
 
     const handlePageSizeChange = (event) => {
         const size = parseInt(event.target.value);
         setPageSize(size);
-        refetch({ search: searchTerm, pageSize: size });
+        setCurrentPage(1)
+        refetch({ search: searchTerm, pageSize: size, currentPage });
     };
     // const products = data.products.items;
 
@@ -226,11 +228,6 @@ const CreateInvoice = () => {
                 >
                     <div className='text-sm' style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
                         <h6 ref={(_subtitle) => (subtitle = _subtitle)}>Your Invoice Estimator Pdf is Generated. Download Your Invoice Pdf.</h6>
-
-                        {/* <svg onClick={closeModal} class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg> */}
-
                         <svg onClick={closeModal} class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
                         </svg>
@@ -259,21 +256,19 @@ const CreateInvoice = () => {
                                 </tr>
                             </thead>
                             <tbody  >
-                                {
-
-                                    <>
-                                        {invoiceData?.map((invoicedetails, index) => (
-                                            <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white">
-                                                    {invoicedetails?.name}
-                                                </td>
-                                                <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.custom_option}</td>
-                                                <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.quantity}</td>
-                                                <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.price}</td>
-                                                <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.total_product_price}</td>
-                                            </tr>
-                                        ))}
-                                    </>
+                                {<>
+                                    {invoiceData?.map((invoicedetails, index) => (
+                                        <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white">
+                                                {invoicedetails?.name}
+                                            </td>
+                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.custom_option}</td>
+                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.quantity}</td>
+                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.price}</td>
+                                            <td className="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-normal dark:text-white" >{invoicedetails?.total_product_price}</td>
+                                        </tr>
+                                    ))}
+                                </>
                                 }
                             </tbody>
                         </table>
@@ -304,24 +299,23 @@ const CreateInvoice = () => {
                 </Modal>
             </div>
 
-            <div className='flex items-center justify-between p-2 lg:px-6 lg:py-6 mt-4 p-2 bg-gray-50' onClick={() => { setShowform(!showform) }}>
-                
+            <div className='flex items-center justify-between p-2 lg:px-4 lg:py-6 mt-4 p-2 bg-gray-50' onClick={() => { setShowform(!showform) }}>
                 <div className='text-sm'>Add Information</div>
                 <div>
-                {
-                    showform === true ?
+                    {
+                        showform === true ?
 
-                        <svg class="w-2 h-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7" />
-                        </svg>
+                            <svg class="w-2 h-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7" />
+                            </svg>
 
-                        : <svg class="w-2 h-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1" />
-                        </svg>
-                }
+                            : <svg class="w-2 h-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1" />
+                            </svg>
+                    }
 
                 </div>
-                
+
             </div>
 
 
@@ -437,12 +431,12 @@ const CreateInvoice = () => {
                             <option value={10}>10</option>
                             <option value={20}>20</option>
                             <option value={30}>30</option>
-                            <option value={40}>40</option>
+                            {/* <option value={40}>40</option>
                             <option value={50}>50</option>
                             <option value={100}>100</option>
                             <option value={150}>150</option>
                             <option value={170}>170</option>
-                            <option value={180}>200</option>
+                            <option value={180}>200</option> */}
                             <option value={400}>All</option>
                         </select>
 
@@ -471,6 +465,9 @@ const CreateInvoice = () => {
                                         <th scope="col" className="px-6 py-3">
                                             Stock status
                                         </th>
+                                        {/* <th scope="col" className="px-6 py-3">
+                                        Quantity Avaliable
+                                        </th> */}
                                         <th scope="col" className="px-6 py-3">
                                             Fitting Charges
                                         </th>
@@ -514,7 +511,8 @@ const CreateInvoice = () => {
                                             {product.price_range.minimum_price.regular_price.value}{' '}
                                             {product.price_range.minimum_price.regular_price.currency}
                                         </th>
-                                        <th scope="col" className="px-6 py-3">{product.stock_status}</th>
+                                        <th scope="col" className="px-6 py-3">{product?.stock_status}</th>
+                                        {/* <th scope="col" className="px-6 py-3">{product?.only_x_left_in_stock}</th> */}
                                         <th scope="col" className="px-6 py-3">
 
                                             <select
@@ -570,17 +568,14 @@ const CreateInvoice = () => {
                                         </div>
 
                                     </div>
-
-
-
-                                    <div>
+                                   <div>
                                         <div className="mt-1 flex  justify-between ">
                                             <div className="mt-1 flex  justify-between  items-center justify-center" >
                                                 <label htmlFor={`quantity_${product.id}`} className="block mb-1 text-xs mr-2">Qty:</label>
                                                 <input
                                                     type="number"
                                                     id={`quantity_${product.id}`}
-                                                    className="border border-gray-300 rounded-md w-12 h-6 justify-between items-center justify-center"
+                                                    className="border border-gray-300 rounded-md w-12 h-6 justify-between items-center justify-center p-1 items-center mx-auto text-align: center text-xs"
                                                     value={productQty[product.id]}
                                                     onChange={(e) => {
                                                         const updatedQty = [...productQty];
@@ -613,11 +608,31 @@ const CreateInvoice = () => {
                                 </div>
                             ))}
                         </div>
-
                     </div>
-                    <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:text-xs" >Submit</button>
+                    <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-2 p-2.5 sm-py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:text-xs" >Submit</button>
                 </form>
                 <>
+
+                {/* {"producttttttttttttttttt", data} */}
+                    <div class="flex flex-col items-center">
+
+                        <span class="text-sm text-gray-700 dark:text-gray-400">
+                            Current page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.current_page}</span> 
+                            {/* Total Page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.page_size}</span> */}
+                          {''}  of <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.total_count}</span> Entries
+                        </span>
+
+                        {/* {console.log("productttttttttttttttt", data?.products?.total_count)} */}
+                        <div class="inline-flex mt-2 xs:mt-0">
+                            <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page - 1) }} disabled={currentPage === 1} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                Prev
+                            </button>
+                            <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page + 1) }} disabled={currentPage >= data?.products?.page_info?.total_pages} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
 
 
                     {/* 
