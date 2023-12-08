@@ -6,6 +6,8 @@ import { useMutation } from '@apollo/react-hooks';
 import Modal from 'react-modal';
 import { useParams } from 'react-router-dom';
 import { Button } from 'flowbite-react';
+import '../App.css';
+
 
 
 
@@ -24,7 +26,19 @@ const customStyles = {
         // borderRadius: '8px', // Rounded corners
         // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
         backgroundColor: '#fff', // White background color
-        padding:'2%'
+        padding: '2%',
+
+        '@media (max-width: 768px)': {
+            width: '90%',
+            padding: '4%',
+            height: '100% '
+        },
+        '@media (max-width: 480px)': {
+            width: '100%',
+            padding: '6%',
+            height: '100% !important '
+        },
+
     },
 
 };
@@ -87,14 +101,9 @@ const CreateInvoice = () => {
             id: EditViewid
         }
     });
-
-
-
     if (Viewloading) {
         <p>Loading.....</p>
     }
-
-
     if (Viewdata) {
         console.log("this data is of type edit12344444 ", Viewdata)
 
@@ -192,14 +201,15 @@ const CreateInvoice = () => {
     const handleSearchChange = (event) => {
         const term = event.target.value;
         setSearchTerm(term);
-        refetch({ search: term, pageSize:pageSize });
+        setCurrentPage(1)
+        refetch({ search: term, pageSize: currentPage });
     };
 
     const handlePageSizeChange = (event) => {
         const size = parseInt(event.target.value);
         setPageSize(size);
         setCurrentPage(1)
-        refetch({ search: searchTerm, pageSize: size, currentPage });
+        refetch({ search: searchTerm, pageSize: currentPage });
     };
     // const products = data.products.items;
 
@@ -224,18 +234,21 @@ const CreateInvoice = () => {
                     isOpen={modalIsOpen}
                     onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
-                    style={customStyles}
+                    // style={customStyles}
+                    className='content'
                     contentLabel="Example Modal"
                 >
-                    <div className='sm-text-xs text-sm' style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
-                        <h6 className='sm-text-xs text-sm' ref={(_subtitle) => (subtitle = _subtitle)}>Your Invoice Estimator Pdf is Generated. Download Your Invoice Pdf.</h6>
+                    <div className='sm-text-xs text-sm' style={{ display: 'flex', justifyContent: 'end', marginBottom: 20 }}>
                         <svg onClick={closeModal} class=" sm-w-4 sm-h-4 w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
                         </svg>
 
                     </div>
+                    <div>
+                        <h6 className='sm-text-xs text-sm text-center mb-4 textcolor' ref={(_subtitle) => (subtitle = _subtitle)}>Your Invoice Estimator Pdf is Generated. Download Your Invoice Pdf.</h6>
 
-                    <div className="overflow-x-auto">
+                    </div>
+                    <div className="overflow-auto">
                         <table className="w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr  >
@@ -273,7 +286,7 @@ const CreateInvoice = () => {
                                 }
                             </tbody>
                         </table>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div  style={{ display: 'flex', justifyContent: 'space-between'}}>
                             <div>
                                 <Button
                                     style={{ backgroundColor: 'blue', padding: 2, color: '#ffff', marginTop: 10 }}
@@ -285,14 +298,23 @@ const CreateInvoice = () => {
                                 </Button>
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
-                                <div className='text-sm'>
-                                    Grand Total:{''}{editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.total_with_currency}
+                                <div className='text-sm flex'>
+                                   <div className='mr-2'>Grand Total:</div><div>
+                                   {''}{editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.total_with_currency}
+                                   </div>
                                 </div>
-                                <div className='text-sm'>
-                                    Discount Price:{''}{editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.customer_discount_with_currency}
+                                <div className='text-sm flex'>
+                                  <div className='mr-2'>
+                                  Discount Price:</div> <div>
+                                  {editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.customer_discount_with_currency}
+                                    </div> 
                                 </div>
-                                <div className='text-sm'>
-                                    Total Payable:{''}{editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.discount_value_with_currency}
+                                <div className='text-sm flex'>
+                                    <div className='mr-2'>Total Payable:</div>
+                                    <div>
+                                    {editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.discount_value_with_currency}
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -569,7 +591,7 @@ const CreateInvoice = () => {
                                         </div>
 
                                     </div>
-                                   <div>
+                                    <div>
                                         <div className="mt-1 flex  justify-between ">
                                             <div className="mt-1 flex  justify-between  items-center justify-center" >
                                                 <label htmlFor={`quantity_${product.id}`} className="block mb-1 text-xs mr-2">Qty:</label>
@@ -614,13 +636,13 @@ const CreateInvoice = () => {
                 </form>
                 <>
 
-                {/* {"producttttttttttttttttt", data} */}
+                    {/* {"producttttttttttttttttt", data} */}
                     <div class="flex flex-col  mt-4 items-center">
 
                         <span class="text-sm text-gray-700 dark:text-gray-400">
-                            Current page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.current_page}</span> 
+                            Current page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.current_page}</span>
                             {/* Total Page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.page_size}</span> */}
-                          {''}  of <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.total_count}</span> Entries
+                            {''}  of <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.total_count}</span> Entries
                         </span>
 
                         {/* {console.log("productttttttttttttttt", data?.products?.total_count)} */}
