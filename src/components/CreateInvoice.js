@@ -13,35 +13,35 @@ import '../App.css';
 
 
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        // width: '90%', // Adjust width for mobile feel
-        maxWidth: '100%', // Set a maximum width for larger screens
-        // borderRadius: '8px', // Rounded corners
-        // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
-        backgroundColor: '#fff', // White background color
-        padding: '2%',
+// const customStyles = {
+//     content: {
+//         top: '50%',
+//         left: '50%',
+//         right: 'auto',
+//         bottom: 'auto',
+//         marginRight: '-50%',
+//         transform: 'translate(-50%, -50%)',
+//         // width: '90%', // Adjust width for mobile feel
+//         maxWidth: '100%', // Set a maximum width for larger screens
+//         // borderRadius: '8px', // Rounded corners
+//         // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
+//         backgroundColor: '#fff', // White background color
+//         padding: '2%',
 
-        '@media (max-width: 768px)': {
-            width: '90%',
-            padding: '4%',
-            height: '100% '
-        },
-        '@media (max-width: 480px)': {
-            width: '100%',
-            padding: '6%',
-            height: '100% !important '
-        },
+//         '@media (max-width: 768px)': {
+//             width: '90%',
+//             padding: '4%',
+//             height: '100% '
+//         },
+//         '@media (max-width: 480px)': {
+//             width: '100%',
+//             padding: '6%',
+//             height: '100% !important '
+//         },
 
-    },
+//     },
 
-};
+// };
 
 // customStyles.content['@media (max-width: 640px)'] = {
 //     width: '95%', // Adjust width for mobile screens

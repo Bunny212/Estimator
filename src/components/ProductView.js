@@ -10,23 +10,23 @@ import '../App.css';
 
 
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: '100%', // Set a maximum width for larger screens
-    // borderRadius: '8px', // Rounded corners
-    // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
-    // backgroundColor: '#fff', // White background color
-    // padding:'5%'
-    padding:'2%'
-  },
+// const customStyles = {
+//   content: {
+//     top: '50%',
+//     left: '50%',
+//     right: 'auto',
+//     bottom: 'auto',
+//     marginRight: '-50%',
+//     transform: 'translate(-50%, -50%)',
+//     maxWidth: '100%', // Set a maximum width for larger screens
+//     // borderRadius: '8px', // Rounded corners
+//     // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
+//     // backgroundColor: '#fff', // White background color
+//     // padding:'5%'
+//     padding:'2%'
+//   },
 
-};
+// };
 
 // customStyles.content['@media (max-width: 640px)'] = {
 //   width: '100%', // Adjust width for mobile screens
