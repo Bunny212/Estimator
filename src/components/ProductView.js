@@ -381,7 +381,7 @@ function ProductView() {
 
   useEffect(() => {
     refetch();
-  });
+  },[]);
 
 
   
