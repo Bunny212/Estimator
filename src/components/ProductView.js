@@ -55,7 +55,7 @@ function ProductView() {
 
   useEffect(() => {
     refetch();
-  },[]);
+  });
   // const navigate = useNavigate();
 
   const [viewdata, SetViewData] = useState('No Response yet')
