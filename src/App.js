@@ -145,6 +145,7 @@ const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path='/' element={<Layout />}>
       {/* <Route path='' element={<Signin />} /> */}
+      {/* <Route path='' element={<CreateInvoice />} /> */}
       <Route index element={<CreateInvoice />} />
       <Route path='ProductView' element={<ProductView />} />
       <Route path='CreateInvoice/:id' element={<CreateInvoice />} />
@@ -166,8 +167,8 @@ const [token] = useState(localStorage.getItem('token'));
 // const TOKEN = token;
 
 const client = new ApolloClient({
-uri: 'http://localhost:3000/graphql',
-// uri: 'https://cyclewalay.com/graphql',
+// uri: 'http://localhost:3000/graphql',
+uri: 'https://cyclewalay.com/graphql',
 cache: new InMemoryCache(),
    headers: {
     authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : '',}
