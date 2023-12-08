@@ -201,7 +201,7 @@ const CreateInvoice = () => {
     const handleSearchChange = (event) => {
         const term = event.target.value;
         setSearchTerm(term);
-        setCurrentPage(1)
+        
         refetch({ search: term, pageSize: currentPage });
     };
 
