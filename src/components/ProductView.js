@@ -383,6 +383,10 @@ function ProductView() {
   //   refetch();
   // },[]);
 
+  useEffect(() => {
+    refetch();
+  }, []); 
+
 
   
 
