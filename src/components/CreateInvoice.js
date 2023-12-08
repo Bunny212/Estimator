@@ -208,7 +208,6 @@ const CreateInvoice = () => {
     const handlePageSizeChange = (event) => {
         const size = parseInt(event.target.value);
         setPageSize(size);
-        setCurrentPage(1)
         refetch({ search: searchTerm, pageSize: currentPage });
     };
     // const products = data.products.items;

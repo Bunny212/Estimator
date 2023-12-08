@@ -3,9 +3,11 @@ import {  NavLink } from 'react-router-dom'
 import Logo from '../Assets/cycleWaalylogo.png'
 // import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from "react-router-dom";
+import { useApolloClient } from '@apollo/client';
+
 
 function Header() {
-
+    const client = useApolloClient(); 
     const [Navbar, SetNavbar] = useState(false)
     const navigate = useNavigate();
     const handleClick = () => {
@@ -17,6 +19,7 @@ function Header() {
     const logoutHandler = () => {
         localStorage.removeItem('token'); // Remove authentication token
         navigate('/signin'); // Redirect to login page
+        client.clearStore(); 
         SetNavbar(false)
     };
 
