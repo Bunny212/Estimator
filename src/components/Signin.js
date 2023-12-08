@@ -22,10 +22,19 @@ const Signin = () => {
         setSubmitting(false);
         console.log("login response ::::", response.data.generateCustomerToken.token)
        
-        if(response.data.generateCustomerToken.token){
-        localStorage.setItem('token', response.data.generateCustomerToken.token);
-        navigate('/');
-        }
+        // if(response.data.generateCustomerToken.token === null ){
+        // localStorage.setItem('token', response.data.generateCustomerToken.token);
+        // navigate('/');
+        // }
+
+        const token = response.data.generateCustomerToken.token;
+        if (token !== null) { // Check if the token is not null
+        localStorage.setItem('token', token); // Store the token in localStorage
+         navigate('/');
+  }
+
+
+
       })
       .catch((error) => {
         console.error('Mutation error:', error);

@@ -92,7 +92,7 @@ const CreateInvoice = () => {
     const [editReturn, setEditReturn] = useState();
     const [CreateEstimate] = useMutation(CREATE_INVOICE_MUTATION);
     const [EditEstimate] = useMutation(EDIT_INVOICE_ESTIMATOR_MUTATION);
-    const [currentPage, setCurrentPage] = useState(4);
+    const [currentPage, setCurrentPage] = useState(1);
     // const [getViewData] = useMutation(INVOICEES_TIMATOR);
 
 
