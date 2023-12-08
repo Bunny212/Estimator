@@ -30,6 +30,7 @@ const Signin = () => {
         const token = response.data.generateCustomerToken.token;
         if (token !== null) { // Check if the token is not null
         localStorage.setItem('token', token); // Store the token in localStorage
+        // localStorage.setItem('token1', token); // Store the token in localStorage
          navigate('/');
          
   }

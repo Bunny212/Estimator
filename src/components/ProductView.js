@@ -56,6 +56,8 @@ function ProductView() {
   useEffect(() => {
     refetch();
   });
+
+  
   // const navigate = useNavigate();
 
   const [viewdata, SetViewData] = useState('No Response yet')
@@ -149,7 +151,7 @@ function ProductView() {
   };
 
 
-  const { loading, error, data, refetch } = useQuery(GET_INVOICE_ESTIMATOR_VIEW);
+  const { loading, error, data, refetch } = useQuery(GET_INVOICE_ESTIMATOR_VIEW, {fetchPolicy: 'network-only'}) ;
 
   if (loading) {
 
@@ -379,9 +381,6 @@ function ProductView() {
   
 
 
-  // useEffect(() => {
-  //   refetch();
-  // },[]);
 
   // useEffect(() => {
   //   refetch();
