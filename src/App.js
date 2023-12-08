@@ -141,21 +141,33 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 
 
 
+// const router = createBrowserRouter(
+//   createRoutesFromElements([
+//     <Route path='/' element={<Layout />}>
+//       {/* <Route path='' element={<Signin />} /> */}
+//       {/* <Route path='' element={<CreateInvoice />} /> */}
+//       <Route index element={<CreateInvoice />} />
+//       <Route path='ProductView' element={<ProductView />} />
+//       <Route path='CreateInvoice/:id' element={<CreateInvoice />} />
+//       {/* <Route path="*" element={<Signin />} /> */}
+//     </Route>, 
+//     <Route path="/signin" element={<Signin />} />
+//   ]
+//   ) 
+// )   
+
+
+
 const router = createBrowserRouter(
   createRoutesFromElements([
-    <Route path='/' element={<Layout />}>
-      {/* <Route path='' element={<Signin />} /> */}
-      {/* <Route path='' element={<CreateInvoice />} /> */}
+    <Route path="/" element={<Layout />}>
       <Route index element={<CreateInvoice />} />
-      <Route path='ProductView' element={<ProductView />} />
-      <Route path='CreateInvoice/:id' element={<CreateInvoice />} />
-      {/* <Route path="*" element={<Signin />} /> */}
-    </Route>, 
+      <Route path="productview" element={<ProductView />} />
+      <Route path="createinvoice/:id" element={<CreateInvoice />} />
+    </Route>,
     <Route path="/signin" element={<Signin />} />
-  ]
-  ) 
-)   
-
+  ])
+);
 
 
 // localStorage.removeItem('token');
