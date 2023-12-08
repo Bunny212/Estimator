@@ -31,7 +31,7 @@ const Signin = () => {
         if (token !== null) { // Check if the token is not null
         localStorage.setItem('token', token); // Store the token in localStorage
          navigate('/');
-         refetch()
+         
   }
 
 
