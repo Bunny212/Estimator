@@ -379,6 +379,14 @@ function ProductView() {
   
 
 
+  useEffect(() => {
+    refetch();
+  });
+
+
+  
+
+
   return (
 
     <>
