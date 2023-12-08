@@ -228,7 +228,7 @@ const CreateInvoice = () => {
     const invoiceData = editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.invoice_data;
     return (
         <>
-            <div>
+            <div className='overflow-auto'>
                 <Modal
                     isOpen={modalIsOpen}
                     onAfterOpen={afterOpenModal}
@@ -247,7 +247,7 @@ const CreateInvoice = () => {
                         <h6 className='sm-text-xs text-sm text-center mb-4 textcolor' ref={(_subtitle) => (subtitle = _subtitle)}>Your Invoice Estimator Pdf is Generated. Download Your Invoice Pdf.</h6>
 
                     </div>
-                    <div className="overflow-auto">
+                    <div className="">
                         <table className="w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr  >
