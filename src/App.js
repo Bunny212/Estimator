@@ -187,9 +187,9 @@ const [token] = useState(localStorage.getItem('token'));
 // })
 
 
-// const httpLink = createHttpLink({
-//   uri: 'https://cyclewalay.com/graphql',
-// });
+const httpLink = createHttpLink({
+  uri: 'https://cyclewalay.com/graphql',
+});
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -206,10 +206,10 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
- uri: 'https://cyclewalay.com/graphql',
+//  uri: 'https://cyclewalay.com/graphql',
 //  uri: 'http://localhost:3000/',
-  link: uri, 
-  // authLink.concat(httpLink),
+  link: httpLink,
+  // link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
 
