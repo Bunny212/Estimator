@@ -61,7 +61,8 @@ const [token] = useState(localStorage.getItem('token'));
 // });
 
 const httpLink = createHttpLink({
-  uri: 'https://luxury-babka-f6ce80.netlify.app', // Change the URI to exclude /graphql
+ uri: 'https://cyclewalay.com',
+
 });
 
 const authLink = setContext((_, { headers }) => {
