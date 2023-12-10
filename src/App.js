@@ -47,35 +47,35 @@ const [token] = useState(localStorage.getItem('token'));
 
 // const TOKEN = token;
 
-const client = new ApolloClient({
+// const client = new ApolloClient({
 // uri: 'http://localhost:3000/graphql',
-uri: 'https://cyclewalay.com/graphql',
-cache: new InMemoryCache(),
-   headers: {
-    authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''}
-})
+// // uri: 'https://cyclewalay.com/graphql',
+// cache: new InMemoryCache(),
+//    headers: {
+//     authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''}
+// })
 
 
 // const httpLink = createHttpLink({
 //   uri: '/graphql',
 // });
 
-// const httpsLink = createHttpLink({
-//  uri: 'https://cyclewalay.com/graphql',
+const httpsLink = createHttpLink({
+ uri: 'https://cyclewalay.com/graphql',
 
-// });
+});
 
-// const authLink = setContext((_, { headers }) => {
-//   // get the authentication token from local storage if it exists
-//   // const token = localStorage.getItem('token');
-//   // return the headers to the context so httpLink can read them
-//   return {
-//     headers: {
-//       ...headers,
-//       // authorization: token ? `Bearer ${token}` : "",
-//    authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''}
-//   }
-// });
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  // const token = localStorage.getItem('token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      // authorization: token ? `Bearer ${token}` : "",
+   authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''}
+  }
+});
 
 // const client = new ApolloClient({
 //  uri: 'https://cyclewalay.com',
@@ -85,10 +85,10 @@ cache: new InMemoryCache(),
 //   cache: new InMemoryCache()
 // });
 
-// const client = new ApolloClient({
-//   link: authLink.concat(httpsLink),
-//   cache: new InMemoryCache(),
-// });
+const client = new ApolloClient({
+  link: authLink.concat(httpsLink),
+  cache: new InMemoryCache(),
+});
 
 
 
