@@ -56,8 +56,12 @@ const [token] = useState(localStorage.getItem('token'));
 // })
 
 
+// const httpLink = createHttpLink({
+//   uri: '/graphql',
+// });
+
 const httpLink = createHttpLink({
-  uri: '',
+  uri: 'https://luxury-babka-f6ce80.netlify.app', // Change the URI to exclude /graphql
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -72,13 +76,19 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 
+// const client = new ApolloClient({
+//  uri: 'https://cyclewalay.com',
+// //  uri: 'http://localhost:3000/',
+//   // link: httpLink,
+//   link: authLink.concat(httpLink),
+//   cache: new InMemoryCache()
+// });
+
 const client = new ApolloClient({
- uri: 'https://cyclewalay.com/graphql',
-//  uri: 'http://localhost:3000/',
-  // link: httpLink,
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
+
 
 
 
