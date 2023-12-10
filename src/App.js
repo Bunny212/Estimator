@@ -228,18 +228,6 @@ useEffect(() => {
 }, [token]);
 
 
-// console.log("this is state", token)
-
-
-  // useEffect(() => {
-  //   if (token) {
-  //     // Redirect to layout page if token exists
-  //     router.navigate('/');
-  //   } else {
-  //     // Redirect to sign-in page if no token
-  //     router.navigate('/signin');
-  //   }
-  // }, [token]);
 
 
 
