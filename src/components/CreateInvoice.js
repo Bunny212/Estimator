@@ -201,13 +201,15 @@ const CreateInvoice = () => {
     const handleSearchChange = (event) => {
         const term = event.target.value;
         setSearchTerm(term);
-        
-        refetch({ search: term, pageSize: currentPage });
+        // setCurrentPage(1)
+        setCurrentPage(1)
+        refetch({ search: term});
     };
 
     const handlePageSizeChange = (event) => {
         const size = parseInt(event.target.value);
         setPageSize(size);
+        setCurrentPage(1)
         refetch({ search: searchTerm, pageSize: currentPage });
     };
     // const products = data.products.items;
@@ -247,7 +249,7 @@ const CreateInvoice = () => {
                         <h6 className='sm-text-xs text-sm text-center mb-4 textcolor' ref={(_subtitle) => (subtitle = _subtitle)}>Your Invoice Estimator Pdf is Generated. Download Your Invoice Pdf.</h6>
 
                     </div>
-                    <div className="">
+                    <div className="overflow-auto">
                         <table className="w-full sm:max-w-xl md:max-w-2xl lg:max-w-4xl text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr  >

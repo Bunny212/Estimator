@@ -24,7 +24,7 @@ function Footer() {
 
     const logoutHandler = () => {
         localStorage.removeItem('token'); // Remove authentication token
-        client.clearStore(); 
+        // client.clearStore(); 
         navigate('/signin'); // Redirect to login page
         // SetNavbar(false)
     };

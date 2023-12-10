@@ -136,11 +136,10 @@ import CreateInvoice from './components/CreateInvoice';
 import ProductView from './components/ProductView';
 import Signin from './components/Signin';
 import Layout from './components/Layout';
-// import { ApolloClient, InMemoryCache, ApolloProvider , createHttpLink} from '@apollo/client';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider , createHttpLink} from '@apollo/client';
+// import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-
-// import { setContext } from '@apollo/client/link/context';
+import { setContext } from '@apollo/client/link/context';
 
 // const router = createBrowserRouter(
 //   createRoutesFromElements([
@@ -179,38 +178,38 @@ const [token] = useState(localStorage.getItem('token'));
 
 // const TOKEN = token;
 
-const client = new ApolloClient({
+// const client = new ApolloClient({
 // uri: 'http://localhost:3000/graphql',
-uri: 'https://cyclewalay.com/graphql',
-cache: new InMemoryCache(),
-   headers: {
-    authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''}
-})
+// // uri: 'https://cyclewalay.com/graphql',
+// cache: new InMemoryCache(),
+//    headers: {
+//     authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''}
+// })
 
 
-// const httpLink = createHttpLink({
-//   uri: '/graphql',
-// });
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
 
-// const authLink = setContext((_, { headers }) => {
-//   // get the authentication token from local storage if it exists
-//   const token = localStorage.getItem('token');
-//   // return the headers to the context so httpLink can read them
-//   return {
-//     headers: {
-//       ...headers,
-//       // authorization: token ? `Bearer ${token}` : "",
-//    authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''}
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      // authorization: token ? `Bearer ${token}` : "",
+   authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''}
 
     
-//   }
-// });
+  }
+});
 
-// const client = new ApolloClient({
-//  uri: 'http://localhost:3000/',
-//   link: authLink.concat(httpLink),
-//   cache: new InMemoryCache()
-// });
+const client = new ApolloClient({
+ uri: 'http://localhost:3000/',
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+});
 
 
 
