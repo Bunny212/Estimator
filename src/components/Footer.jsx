@@ -27,7 +27,7 @@ function Footer() {
         localStorage.removeItem('token'); // Remove authentication token
         navigate('/signin'); // Redirect to login page
         // client.resetStore(); 
-        SetNavbar(false)
+        // SetNavbar(false)
     };
 
     const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
