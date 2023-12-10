@@ -188,7 +188,7 @@ const [token] = useState(localStorage.getItem('token'));
 
 
 const httpLink = createHttpLink({
-  uri: '',
+  
 });
 
 const authLink = setContext((_, { headers }) => {
