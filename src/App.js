@@ -173,7 +173,7 @@ const router = createBrowserRouter(
 // localStorage.removeItem('token');
 
 function App() {
-const [token] = useState(localStorage.getItem('token'));
+// const [token] = useState(localStorage.getItem('token'));
 
 
 // const TOKEN = token;
@@ -206,7 +206,8 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
- uri: 'http://localhost:3000/',
+ uri: 'https://cyclewalay.com/',
+//  uri: 'http://localhost:3000/',
   link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
