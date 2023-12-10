@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 // import Header from './Header';
 import { useNavigate } from "react-router-dom";
 import {  NavLink } from 'react-router-dom'
-import { useApolloClient } from '@apollo/client';
+// import { useApolloClient } from '@apollo/client';
 
 
 
@@ -12,7 +12,7 @@ import { useApolloClient } from '@apollo/client';
 
 
 function Footer() {
-    const client = useApolloClient(); 
+    // const client = useApolloClient(); 
 
     const navigate = useNavigate();
 

@@ -7,7 +7,7 @@ import { useApolloClient } from '@apollo/client';
 
 
 function Header() {
-    const client = useApolloClient(); 
+    // const client = useApolloClient(); 
     const [Navbar, SetNavbar] = useState(false)
     const navigate = useNavigate();
     const handleClick = () => {
