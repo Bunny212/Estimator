@@ -69,15 +69,13 @@ const authLink = setContext((_, { headers }) => {
       ...headers,
       // authorization: token ? `Bearer ${token}` : "",
    authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''}
-
-    
   }
 });
 
 const client = new ApolloClient({
  uri: 'https://cyclewalay.com/graphql',
 //  uri: 'http://localhost:3000/',
-  // link: httpLink,
+  link: httpLink,
   link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
