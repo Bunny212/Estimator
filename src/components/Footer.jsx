@@ -22,11 +22,12 @@ function Footer() {
         // SetNavbar(false)
     };
 
+
     const logoutHandler = () => {
         localStorage.removeItem('token'); // Remove authentication token
-        // client.clearStore(); 
         navigate('/signin'); // Redirect to login page
-        // SetNavbar(false)
+        // client.resetStore(); 
+        SetNavbar(false)
     };
 
     const isMobile = useMediaQuery({ query: '(max-width: 640px)' });

@@ -3,7 +3,7 @@ import {  NavLink } from 'react-router-dom'
 import Logo from '../Assets/cycleWaalylogo.png'
 // import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from "react-router-dom";
-import { useApolloClient } from '@apollo/client';
+// import { useApolloClient } from '@apollo/client';
 
 
 function Header() {
