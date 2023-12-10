@@ -173,7 +173,7 @@ const router = createBrowserRouter(
 // localStorage.removeItem('token');
 
 function App() {
-// const [token] = useState(localStorage.getItem('token'));
+const [token] = useState(localStorage.getItem('token'));
 
 
 // const TOKEN = token;
@@ -228,18 +228,18 @@ useEffect(() => {
 }, [token]);
 
 
-console.log("this is state", token)
+// console.log("this is state", token)
 
 
-  useEffect(() => {
-    if (token) {
-      // Redirect to layout page if token exists
-      router.navigate('/');
-    } else {
-      // Redirect to sign-in page if no token
-      router.navigate('/signin');
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     // Redirect to layout page if token exists
+  //     router.navigate('/');
+  //   } else {
+  //     // Redirect to sign-in page if no token
+  //     router.navigate('/signin');
+  //   }
+  // }, [token]);
 
 
 
