@@ -60,7 +60,7 @@ const [token] = useState(localStorage.getItem('token'));
 //   uri: '/graphql',
 // });
 
-const httpLink = createHttpLink({
+const httpsLink = createHttpLink({
  uri: 'https://cyclewalay.com',
 
 });
