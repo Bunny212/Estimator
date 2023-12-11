@@ -62,6 +62,7 @@ const [token] = useState(localStorage.getItem('token'));
 
 const httpsLink = createHttpLink({
  uri: 'https://cyclewalay.com/graphql',
+//  uri: 'http://localhost:3000/graphql',
 
 });
 
