@@ -429,14 +429,14 @@ function ProductView() {
             <div >
 
               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Button
+                <a
                   style={{ backgroundColor: 'blue', padding: 2, color: '#ffff', marginTop: 10 }}
                   href={viewResponse?.invoice_pdf}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Pdf
-                </Button>
+                </a>
 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
                   <div className='text-xs'>
