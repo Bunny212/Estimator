@@ -275,7 +275,7 @@ function ProductView() {
                           <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
                             <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
                           </svg>
-                          <a className='text-xs ml-2 sm-hidden'>View</a>
+                          <spam className='text-xs ml-2 sm-hidden'>View</spam>
                         </div>
                         <div
                           onClick={() => console.log(row.estimate_id)}
@@ -285,9 +285,9 @@ function ProductView() {
                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.418 17.861 1 20l2.139-6.418m4.279 4.279 10.7-10.7a3.027 3.027 0 0 0-2.14-5.165c-.802 0-1.571.319-2.139.886l-10.7 10.7m4.279 4.279-4.279-4.279m2.139 2.14 7.844-7.844m-1.426-2.853 4.279 4.279" />
                             </svg>
                           </Link>
-                          <a className='text-xs ml-2 sm-hidden'>
+                          <spam className='text-xs ml-2 sm-hidden'>
                             Edit
-                          </a>
+                          </spam>
                        </div>
                         {/* Add other action buttons */}
                         <div
@@ -298,9 +298,9 @@ function ProductView() {
                           <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                             <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z" />
                           </svg>
-                          <a className='text-xs ml-2 sm-hidden'>
+                          <span className='text-xs ml-2 sm-hidden'>
                             Delete
-                          </a>
+                          </span>
                         </div>
                         <div
                           onClick={() => {
@@ -310,7 +310,7 @@ function ProductView() {
                           <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1" />
                           </svg>
-                          <a className='text-xs ml-2 sm-hidden'>order</a>
+                          <span className='text-xs ml-2 sm-hidden'>order</span>
                         </div>
                       </div>
                     ) : (
@@ -333,7 +333,7 @@ function ProductView() {
                       <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
                         <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
                       </svg>
-                      <a className='text-xs ml-2'>View</a>
+                      <span className='text-xs ml-2'>View</span>
                     </div>
 
                     )
@@ -429,14 +429,14 @@ function ProductView() {
             <div >
 
               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <a
+                <span
                   style={{ backgroundColor: 'blue', padding: 2, color: '#ffff', marginTop: 10 }}
                   href={viewResponse?.invoice_pdf}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Pdf
-                </a>
+                </span>
 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
                   <div className='text-xs'>
