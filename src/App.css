@@ -16,7 +16,7 @@
 }
 
 /* Media query for screens up to 480px wide */
-@media (max-width: 480px) {
+@media (max-width: 639px) {
   .content {
     width: 100%;
     padding: 3%;
@@ -41,6 +41,16 @@
   .cfvlby{
     display: none !important;
   }
+
+  .mobile-card{
+    display: flex;
+  }
+  
+
+  
+.Hiden-label{
+  display: block !important;
+}
  
 }
 
@@ -48,3 +58,10 @@
 
   color: red;
 } 
+
+
+
+.Hiden-label{
+  display: none;
+}
+

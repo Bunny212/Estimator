@@ -231,7 +231,7 @@ function ProductView() {
       cell: row => (
         <div>
           <span className="hidden sm:inline">{row.customer_name}</span>
-          <div className="sm:hidden">
+          <div className="Hiden-label">
           <div className='mobile-card mb-1'>
           <div className='font-semibold mr-2 text-sm'>Name:</div>  
            <div className='text-sm'>{row.customer_name}</div>
@@ -251,7 +251,7 @@ function ProductView() {
       cell: row => (
         <div>
           <span className="hidden sm:inline">{row.discount_amount}</span>
-          <div className='sm:hidden'>
+          <div className='Hiden-label'>
             <div className='mobile-card mb-1'>        
             <div className='font-semibold mr-2 text-sm'>
             Dis-Amount:
@@ -274,7 +274,7 @@ function ProductView() {
       cell: row => (
         <div>
           <span className="hidden sm:inline">{row.order_status}</span>
-          <div className='sm:hidden'>
+          <div className='Hiden-label'>
             <div className='mobile-card mb-1'>
             <div className='font-semibold mr-2 text-sm'>
             Status:
@@ -297,7 +297,7 @@ function ProductView() {
         <div>
           <span className="hidden sm:inline">{row.total}</span>
 
-          <div className='sm:hidden'>
+          <div className='Hiden-label'>
             <div className='mobile-card mb-1'>
               <div className='font-semibold mr-2 text-sm'>total:</div>
               <div className='text-sm'>{row.total}</div>
