@@ -23,6 +23,24 @@
     height: 100%;
   }
 
+  .kWxXQY{
+/* display: block; */
+    display: block !important;
+    background-color: #fff !important;
+    padding: 10px !important;
+
+
+  }
+  .fjKvll{
+    display: block !important;
+    background-color: #fff;
+    padding: 10px !important;
+    width: '100%';
+
+  }
+  .cfvlby{
+    display: none !important;
+  }
  
 }
 

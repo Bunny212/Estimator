@@ -62,8 +62,8 @@ function ProductView() {
 
   const [viewdata, SetViewData] = useState('No Response yet')
   const [setDeleteData] = useState('No Response yet');
-  const [Options, setOptions] = useState(false);
-  const [selectedRowId, setSelectedRowId] = useState(null);
+  const [ setOptions] = useState(false);
+  // const [selectedRowId, setSelectedRowId] = useState(null);
   // const [placeOrder, setPlaceOrder] = useState("oder not place yet ")
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -207,18 +207,18 @@ function ProductView() {
     console.log("this is fahad testing", data)
   }
   if (error) return <p>Error: {error?.message}</p>;
+  var invoices = data?.invoiceestimator_view;
 
 
-  const invoices = data?.invoiceestimator_view;
 
   console.log("this is invoice data:::::", data)
 
   var viewResponse = viewdata?.data?.popupInvoiceEstimatorView?.edit_invoice_estimator
 
-  const handleRowClick = (rowId) => {
-    setOptions(!Options); // Toggle options visibility
-    setSelectedRowId(rowId); // Update selected row ID
-  };
+  // const handleRowClick = (rowId) => {
+  //   setOptions(!Options); // Toggle options visibility
+  //   setSelectedRowId(rowId); // Update selected row ID
+  // };
 
 
 
@@ -227,122 +227,158 @@ function ProductView() {
       name: 'Name',
       selector: 'customer_name',
       sortable: true,
+      // cell: row => <div>Name: {row.customer_name}</div>,
+      cell: row => (
+        <div>
+          <span className="hidden sm:inline">{row.customer_name}</span>
+          <div className="sm:hidden">
+          <div className='mobile-card mb-1'>
+          <div className='font-semibold mr-2 text-sm'>Name:</div>  
+           <div className='text-sm'>{row.customer_name}</div>
+          </div>
+          </div>
+        </div>
+      ),
+  
+
     },
     {
       name: 'Dis-Amount',
       selector: 'discount_amount',
       sortable: true,
+      // cell: row => <div>Dis-Amount: {row.discount_amount}</div>,
+
+      cell: row => (
+        <div>
+          <span className="hidden sm:inline">{row.discount_amount}</span>
+          <div className='sm:hidden'>
+            <div className='mobile-card mb-1'>        
+            <div className='font-semibold mr-2 text-sm'>
+            Dis-Amount:
+            </div>
+            <div className='text-sm'>
+            {row.discount_amount}
+            </div>
+            </div>
+          </div>
+          <span className="sm:hidden font-semibold"> </span>
+        </div>
+      ),
+
     },
     {
       name: 'Order Status',
       selector: 'order_status',
       sortable: true,
+      // cell: row => <div>order_status: {row.order_status}</div>,
+      cell: row => (
+        <div>
+          <span className="hidden sm:inline">{row.order_status}</span>
+          <div className='sm:hidden'>
+            <div className='mobile-card mb-1'>
+            <div className='font-semibold mr-2 text-sm'>
+            Status:
+            </div>
+            <div className='text-sm'>
+            {row.order_status}
+            </div>
+            </div>
+          </div>
+        </div>
+      ),
+
     },
     {
       name: 'Total',
       selector: 'total',
       sortable: true,
+      // cell: row => <div>total: {row.total}</div>,
+      cell: row => (
+        <div>
+          <span className="hidden sm:inline">{row.total}</span>
+
+          <div className='sm:hidden'>
+            <div className='mobile-card mb-1'>
+              <div className='font-semibold mr-2 text-sm'>total:</div>
+              <div className='text-sm'>{row.total}</div>
+            </div>
+          </div>
+          {/* <span className="sm:hidden font-semibold"> </span> */}
+        </div>
+      ),
+
     },
     {
       name: 'Actions',
       cell: row => (
         <>
 
-          <div class="relative inline-block text-left">
-            <div>
-              <button onClick={() => handleRowClick(row.id)} type="button" class="inline-flex w-full justify-center rounded-md bg-white px-2 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                Actions
-                <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                </svg>
-              </button>
-            </div>
-
-            {
-              Options && row.id === selectedRowId && (
-                <div className=" right-0 z-10 mt-1 w-35 text-xs origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
-                  <div className="py-1 z-50" role="none">
-                    {row.order_status === "Not Placed" ? (
-                      <div>
-                        <div
-                          onClick={() => {
-                            ViewHandler(row.estimate_id);
-                          }}
-                          class="text-gray-700  px-4 py-1 text-sm flex" role="menuitem" tabindex="-1" id="menu-item-1">
-                          {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+          {row.order_status === "Not Placed" ? (
+            <div className='flex flex-wrap'>
+              <div
+                onClick={() => {
+                  ViewHandler(row.estimate_id);
+                }}
+                class="text-gray-700 bg-white shadow-md rounded-md m-1 px-2 py-1 text-sm flex" role="menuitem" tabindex="-1" id="menu-item-1">
+                {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
                             <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
                           </svg> */}
-                          <spam className='text-xs sm-hidden'>View</spam>
-                        </div>
-                        <div
-                          onClick={() => console.log(row.estimate_id)}
-                         class="text-gray-700  px-4 py-1 text-xs flex " role="menuitem" tabindex="-1" id="menu-item-1">
-                          <Link to={`/CreateInvoice/${row.estimate_id}`}>
-                            {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
+                <spam className='text-xs sm-hidden'>View</spam>
+              </div>
+              <div
+                onClick={() => console.log(row.estimate_id)}
+                class="text-gray-700 bg-white shadow-md rounded-md m-1 px-2 py-1 text-xs flex " role="menuitem" tabindex="-1" id="menu-item-1">
+                <Link to={`/CreateInvoice/${row.estimate_id}`}>
+                  {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.418 17.861 1 20l2.139-6.418m4.279 4.279 10.7-10.7a3.027 3.027 0 0 0-2.14-5.165c-.802 0-1.571.319-2.139.886l-10.7 10.7m4.279 4.279-4.279-4.279m2.139 2.14 7.844-7.844m-1.426-2.853 4.279 4.279" />
                             </svg> */}
-                              <spam className='text-xs  sm-hidden'>
-                            Edit
-                          </spam>
-                          </Link>
-                          
-                       </div>
-                        {/* Add other action buttons */}
-                        <div
-                          onClick={() => {
-                            DeleteHandler(row.estimate_id);
-                          }}
-                          class="text-gray-700 flex px-4 py-1 text-xs" role="menuitem" tabindex="-1" id="menu-item-1">
-                          {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                  <spam className='text-xs  sm-hidden'>
+                    Edit
+                  </spam>
+                </Link>
+
+              </div>
+              {/* Add other action buttons */}
+              <div
+                onClick={() => {
+                  DeleteHandler(row.estimate_id);
+                }}
+                class="text-gray-700 bg-white shadow-md rounded-md m-1 px-2 py-1 text-xs" role="menuitem" tabindex="-1" id="menu-item-1">
+                {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                             <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z" />
                           </svg> */}
-                          <span className='text-xs sm-hidden'>
-                            Delete
-                          </span>
-                        </div>
-                        <div
-                          onClick={() => {
-                            OrderHanlder(row.estimate_id);
-                          }}
-                          class="text-gray-700 px-4 py-1 text-xs flex" role="menuitem" tabindex="-1" id="menu-item-1">
-                          {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                <span className='text-xs sm-hidden'>
+                  Delete
+                </span>
+              </div>
+              <div
+                onClick={() => {
+                  OrderHanlder(row.estimate_id);
+                }}
+                class="text-gray-700 bg-white shadow-md rounded-md m-1 px-2 py-1 text-xs flex" role="menuitem" tabindex="-1" id="menu-item-1">
+                {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1" />
                           </svg> */}
-                          <span className='text-xs sm-hidden'>Order</span>
-                        </div>
-                      </div>
-                    ) : (
-                      // <div class="py-1" role="none">
-                      //   <div
-                      //   onClick={() => {
-                      //     ViewHandler(row.estimate_id);
-                      //   }} class="text-gray-700 flex px-4 py-2  text-xs" role="menuitem" tabindex="-1" id="menu-item-1">
-                      //      <a className='text-xs ml-2'>View</a>
-                      //       <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
-                      //         <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                      //       </svg>
-                      //      </div>
-                      // </div>
-                      <div
-                      onClick={() => {
-                        ViewHandler(row.estimate_id);
-                      }}
-                      class="text-gray-700 block px-4 py-1 text-sm flex" role="menuitem" tabindex="-1" id="menu-item-1">
-                      {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                <span className='text-xs sm-hidden'>Order</span>
+              </div>
+            </div>
+          ) : (
+
+            <button
+              onClick={() => {
+                ViewHandler(row.estimate_id);
+              }}
+              class="text-gray-700 bg-white shadow-md rounded-md px-2 py-1 text-sm flex" role="menuitem" tabindex="-1" id="menu-item-1">
+              {/* <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
                         <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
                       </svg> */}
-                      <span className='text-xs ml-1'>View</span>
-                    </div>
+              <span className='text-xs'>View</span>
+            </button>
 
-                    )
-                    }
-                  </div>
-                </div>
-              )
+          )
+          }
 
-            }
 
-          </div>
         </>
       ),
     },
@@ -427,7 +463,7 @@ function ProductView() {
 
               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <span
-                  style={{ backgroundColor: 'blue',fontSize:15 ,paddingInline:10, paddingBlock:5,    borderRadius:5 , color: '#ffff', marginTop: 20 }}
+                  style={{ backgroundColor: 'blue', fontSize: 15, paddingInline: 10, paddingBlock: 5, borderRadius: 5, color: '#ffff', marginTop: 20 }}
                   href={viewResponse?.invoice_pdf}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -459,6 +495,7 @@ function ProductView() {
 
           columns={customColumns}
           data={invoices}
+          // data ={invoices.reverse()}
           pagination
           highlightOnHover
           striped
