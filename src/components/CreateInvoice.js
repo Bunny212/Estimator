@@ -273,8 +273,6 @@ const CreateInvoice = () => {
                                         Price
                                     </th>
                                     <th scope="col" className="px-2 py-2 text-xs">
-                                    </th>
-                                    <th scope="col" className="px-2 py-2 text-xs">
                                         Total
                                     </th>
                                 </tr>

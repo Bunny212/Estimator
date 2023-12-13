@@ -104,6 +104,7 @@ function ProductView() {
       })
       .catch((error) => {
         console.error('Mutation error:', error);
+        alert(error.message)
       });
   };
 
@@ -153,6 +154,8 @@ function ProductView() {
           // </div>
           error.message
         )
+
+        console.log(error.message)
       });
   };
 
@@ -201,18 +204,16 @@ function ProductView() {
     </div>
   }
 
-
-
   if (data) {
     console.log("this is fahad testing", data)
   }
   if (error) return <p>Error: {error?.message}</p>;
-  var invoices = data?.invoiceestimator_view;
+  var invoices = data?.invoiceestimator_view.sort((a, b) => b.id - a.id);
 
 
 
-  console.log("this is invoice data:::::", data)
-
+  // console.log("this is invoice data:::::", data?.invoiceestimator_view.sort((a, b) => b.id - a.id))
+  
   var viewResponse = viewdata?.data?.popupInvoiceEstimatorView?.edit_invoice_estimator
 
   // const handleRowClick = (rowId) => {
@@ -239,9 +240,7 @@ function ProductView() {
           </div>
         </div>
       ),
-  
-
-    },
+      },
     {
       name: 'Dis-Amount',
       selector: 'discount_amount',
@@ -466,7 +465,6 @@ function ProductView() {
                     </td>
                     <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.price}</td>
                     <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.quantity}</td>
-                    {/* <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >{invoicedetails?.price}</td> */}
                     <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.total_product_price}</td>
                   </tr>
                 ))
