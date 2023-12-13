@@ -116,6 +116,7 @@ const CreateInvoice = () => {
 
     // console.log("this is form data for checkbox ", formData?.chked_box_val.map(item => item.product_id))
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         refetchcheck()
         if (formData && formData.chked_box_val) {
             const productIds = formData.chked_box_val.map(item => item.product_id);
