@@ -234,7 +234,7 @@ function ProductView() {
           <span className="hidden sm:inline">{row.customer_name}</span>
           <div className="Hiden-label">
           <div className='mobile-card mb-1'>
-          <div className='font-semibold mr-7 text-sm widthtable'>Name:</div>  
+          <div className='font-semibold mr-2 text-sm widthtable'>Name:</div>  
            <div className='text-sm widthtable'>{row.customer_name}</div>
           </div>
           </div>
@@ -275,8 +275,8 @@ function ProductView() {
           <span className="hidden sm:inline">{row.customer_address}</span>
           <div className='Hiden-label'>
             <div className='mobile-card mb-1'>
-            <div className='font-semibold mr-5 text-sm'>
-            Address:
+            <div className='font-semibold mr-2 text-sm'>
+            Status:
             </div>
             <div className='text-sm'>
             {row.customer_address}
@@ -285,6 +285,7 @@ function ProductView() {
           </div>
         </div>
       ),
+
     },
     {
       name: 'Order Status',
@@ -296,7 +297,7 @@ function ProductView() {
           <span className="hidden sm:inline">{row.order_status}</span>
           <div className='Hiden-label'>
             <div className='mobile-card mb-1'>
-            <div className='font-semibold mr-6 text-sm'>
+            <div className='font-semibold mr-2 text-sm'>
             Status:
             </div>
             <div className='text-sm'>
@@ -318,7 +319,7 @@ function ProductView() {
 
           <div className='Hiden-label'>
             <div className='mobile-card mb-1'>
-              <div className='font-semibold mr-9 text-sm'>total:</div>
+              <div className='font-semibold mr-2 text-sm'>total:</div>
               <div className='text-sm'>{row.total}</div>
             </div>
           </div>
