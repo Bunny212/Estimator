@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { GET_ALL_PRODUCT, CREATE_INVOICE_MUTATION, EDIT_INVOICE_ESTIMATOR_MUTATION, YOUR_QUERY } from './GraphQlApi/mutations';
 import { useQuery } from '@apollo/react-hooks';
@@ -55,7 +55,6 @@ const CreateInvoice = () => {
     const idString = id;
     const ViewID = idString?.slice(0, 4);
     const EditViewid = parseInt(ViewID);
-
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -85,7 +84,7 @@ const CreateInvoice = () => {
     console.log("this is row data:::::", rowDetails)
     // const [productidclick, setProductIdClick] = useState(2);
     // const [selectedProductIds, setSelectedProductIds] = useState([]);
-    const [selectedProductIds, setSelectedProductIds] = useState([]);
+    // const [selectedProductIds, setSelectedProductIds] = useState([]);
     const [productQty, setProductQty] = useState([1])
     const [selectedOption, setSelectedOption] = useState('default');
     // const [modalData, setModalData] = useState();
@@ -96,7 +95,7 @@ const CreateInvoice = () => {
     // const [getViewData] = useMutation(INVOICEES_TIMATOR);
 
 
-    const { loading: Viewloading, error: Viewerror, data: Viewdata, } = useQuery(YOUR_QUERY, {
+    const { loading: Viewloading, error: Viewerror, data: Viewdata, refetch:refetchcheck} = useQuery(YOUR_QUERY, {
         variables: {
             id: EditViewid
         }
@@ -115,8 +114,16 @@ const CreateInvoice = () => {
     // var formData = Viewdata?.invoiceestimator_edit
     var formData = Viewdata?.invoiceestimator_edit
 
-    // console.log("this is form data ", formData?.customer_address)
-
+    // console.log("this is form data for checkbox ", formData?.chked_box_val.map(item => item.product_id))
+    useEffect(() => {
+        refetchcheck()
+        if (formData && formData.chked_box_val) {
+            const productIds = formData.chked_box_val.map(item => item.product_id);
+            setSelectedProductIds(productIds);
+        }
+    }, [formData]);
+    
+    const [selectedProductIds, setSelectedProductIds] = useState(formData?.chked_box_val ||[]);
 
     const formik = useFormik({
         initialValues: {
@@ -128,7 +135,7 @@ const CreateInvoice = () => {
             CNumber: formData?.customer_number || '',
             email: formData?.customer_email || '',
             Coupon: formData?.coupon_code || '',
-            selectedProducts: [],
+            selectedProducts: formData?.chked_box_val || [],
 
         },
 
@@ -203,7 +210,7 @@ const CreateInvoice = () => {
         setSearchTerm(term);
         // setCurrentPage(1)
         setCurrentPage(1)
-        refetch({ search: term});
+        refetch({ search: term });
     };
 
     const handlePageSizeChange = (event) => {
@@ -286,7 +293,7 @@ const CreateInvoice = () => {
                                 }
                             </tbody>
                         </table>
-                        <div  style={{ display: 'flex', justifyContent: 'space-between'}}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div>
                                 <Button
                                     style={{ backgroundColor: 'blue', padding: 2, color: '#ffff', marginTop: 10 }}
@@ -299,22 +306,22 @@ const CreateInvoice = () => {
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
                                 <div className='text-sm flex'>
-                                   <div className='mr-2'>Grand Total:</div><div>
-                                   {''}{editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.total_with_currency}
-                                   </div>
+                                    <div className='mr-2'>Grand Total:</div><div>
+                                        {''}{editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.total_with_currency}
+                                    </div>
                                 </div>
                                 <div className='text-sm flex'>
-                                  <div className='mr-2'>
-                                  Discount Price:</div> <div>
-                                  {editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.customer_discount_with_currency}
-                                    </div> 
+                                    <div className='mr-2'>
+                                        Discount Price:</div> <div>
+                                        {editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.customer_discount_with_currency}
+                                    </div>
                                 </div>
                                 <div className='text-sm flex'>
                                     <div className='mr-2'>Total Payable:</div>
                                     <div>
-                                    {editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.discount_value_with_currency}
+                                        {editReturn?.editInvoiceEstimator?.edit_invoice_estimator?.discount_value_with_currency}
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -354,7 +361,7 @@ const CreateInvoice = () => {
                                             name="DiscountAmount"
                                             type="number"
                                             onChange={formik.handleChange}
-                                            value={formik?.values?.DiscountAmount} placeholder="Discount Amount" required />
+                                            value={formik?.values?.DiscountAmount} placeholder="Discount Amount" />
                                     </div>
                                     <div className="relative z-0 w-full mb-2 group">
                                         <label for="DiscountType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Discount Type</label>
@@ -422,7 +429,7 @@ const CreateInvoice = () => {
                                             name="email"
                                             type="email"
                                             onChange={formik.handleChange}
-                                            value={formik?.values?.email} required />
+                                            value={formik?.values?.email} />
                                     </div>
                                     <div className="relative z-0 w-full mb-2 group">
                                         <label for="Coupon" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Coupon Code:</label>
@@ -502,6 +509,9 @@ const CreateInvoice = () => {
                                             <input
                                                 type="checkbox"
                                                 onChange={() => handleProductSelection(product.id, selectedOption[product.id])}
+
+                                                
+
                                                 checked={selectedProductIds.includes(product.id)}
                                             />
 
@@ -576,8 +586,13 @@ const CreateInvoice = () => {
                                                     id={`checkbox_${product.id}`}
                                                     className=" text-xs"
                                                     onChange={() => handleProductSelection(product.id, selectedOption[product.id])}
-                                                    checked={selectedProductIds.includes(product.id)}
+                                                    checked={selectedProductIds.includes(product.id)}                                    
+                                                
                                                 />
+
+                                                <div>
+                                                    {/* {formData?.chked_box_val} */}
+                                                </div>
                                             </label>
                                             <div className="flex-1">
                                                 <h3 className="text-xs font-semibold ">{product.name}</h3>

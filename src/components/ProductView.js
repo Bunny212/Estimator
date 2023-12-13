@@ -267,6 +267,28 @@ function ProductView() {
 
     },
     {
+      name: 'Customer Address',
+      selector: 'customer_address',
+      sortable: true,
+      // cell: row => <div>order_status: {row.order_status}</div>,
+      cell: row => (
+        <div>
+          <span className="hidden sm:inline">{row.customer_address}</span>
+          <div className='Hiden-label'>
+            <div className='mobile-card mb-1'>
+            <div className='font-semibold mr-2 text-sm'>
+            Status:
+            </div>
+            <div className='text-sm'>
+            {row.customer_address}
+            </div>
+            </div>
+          </div>
+        </div>
+      ),
+
+    },
+    {
       name: 'Order Status',
       selector: 'order_status',
       sortable: true,
@@ -286,7 +308,6 @@ function ProductView() {
           </div>
         </div>
       ),
-
     },
     {
       name: 'Total',
