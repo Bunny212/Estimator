@@ -39,11 +39,15 @@
 
   .mobile-card {
     display: flex;
+    justify-content: space-between !important;
   }
 
   .Hiden-label {
     display: block !important;
   }
+   /* .widthtable{
+    width: '50%' !important;
+  } */
 }
 
 .textcolor {

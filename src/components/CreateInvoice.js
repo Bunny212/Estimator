@@ -346,10 +346,7 @@ const CreateInvoice = () => {
                     }
 
                 </div>
-
             </div>
-
-
             <div className="lg:px-6 lg:py-12 mb-40 py-6">
                 <form onSubmit={formik.handleSubmit}>
                     {
