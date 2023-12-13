@@ -451,8 +451,7 @@ function ProductView() {
                   <th scope="col" className="sm-px-2 sm-py-2  px-4 py-4 text-xs">
                     Quantity
                   </th>
-                  {/* <th scope="col" className="px-6 py-3">
-                                        
+                  {/* <th scope="col" className="px-6 py-3"> 
                                     </th> */}
                   <th scope="col" className="sm-px-2 sm-py-2  px-4 py-4 text-xs">
                     Total
@@ -461,7 +460,6 @@ function ProductView() {
               </thead>
               <tbody>
                 {viewResponse?.invoice_data.map((invoiceView) => (
-
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900  dark:text-white">
                       {invoiceView?.name}
@@ -471,7 +469,6 @@ function ProductView() {
                     {/* <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" >{invoicedetails?.price}</td> */}
                     <td className="sm-px-2 sm-py-2  px-4 py-4 font-medium text-gray-900  dark:text-white" >{invoiceView?.total_product_price}</td>
                   </tr>
-
                 ))
                 }
 

@@ -122,7 +122,7 @@ const CreateInvoice = () => {
             const productIds = formData.chked_box_val.map(item => item.product_id);
             setSelectedProductIds(productIds);
         }
-    }, [formData]);
+    }, [formData, refetchcheck]);
     
     const [selectedProductIds, setSelectedProductIds] = useState(formData?.chked_box_val ||[]);
 
@@ -271,6 +271,8 @@ const CreateInvoice = () => {
                                     </th>
                                     <th scope="col" className="px-2 py-2 text-xs">
                                         Price
+                                    </th>
+                                    <th scope="col" className="px-2 py-2 text-xs">
                                     </th>
                                     <th scope="col" className="px-2 py-2 text-xs">
                                         Total
@@ -494,6 +496,9 @@ const CreateInvoice = () => {
                                             Price
                                         </th>
                                         <th scope="col" className="px-6 py-3">
+                                            QTY
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
                                             Stock status
                                         </th>
                                         {/* <th scope="col" className="px-6 py-3">
@@ -509,9 +514,7 @@ const CreateInvoice = () => {
                                         <th scope="col" className="px-6 py-3">
                                             <input
                                                 type="checkbox"
-                                                onChange={() => handleProductSelection(product.id, selectedOption[product.id])}
-
-                                                
+                                                onChange={() => handleProductSelection(product.id, selectedOption[product.id])}                                
 
                                                 checked={selectedProductIds.includes(product.id)}
                                             />
@@ -541,9 +544,14 @@ const CreateInvoice = () => {
 
                                         </th>
 
+
                                         <th scope="col" className="px-6 py-3">
                                             {product.price_range.minimum_price.regular_price.value}{' '}
                                             {product.price_range.minimum_price.regular_price.currency}
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            {product?.product_qty}
+                                            {/* {product.price_range.minimum_price.regular_price.currency} */}
                                         </th>
                                         <th scope="col" className="px-6 py-3">{product?.stock_status}</th>
                                         {/* <th scope="col" className="px-6 py-3">{product?.only_x_left_in_stock}</th> */}
@@ -598,6 +606,7 @@ const CreateInvoice = () => {
                                             <div className="flex-1">
                                                 <h3 className="text-xs font-semibold ">{product.name}</h3>
                                                 <p className='text-xs'>Price: {product.price_range.minimum_price.regular_price.value}</p>
+                                                <p className='text-xs'>Qty Avaliable: {product.product_qty}</p>
                                             </div>
                                             <img
                                                 src={product.image.url}

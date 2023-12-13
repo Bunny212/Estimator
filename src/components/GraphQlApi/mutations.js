@@ -174,6 +174,7 @@ export const GET_ALL_PRODUCT = gql`
     products(search: $search, pageSize: $pageSize , currentPage: $currentPage) {
       total_count
       items {
+        product_qty
         id
         name
         sku
