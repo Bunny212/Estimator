@@ -99,8 +99,8 @@ function ProductView() {
       .then((response) => {
         console.log('Mutation result:12222', response);
         SetViewData(response);
-        setOptions(false);
         openModal()
+        // setOptions(false);
       })
       .catch((error) => {
         console.error('Mutation error:', error);
