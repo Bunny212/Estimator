@@ -7,45 +7,8 @@ import Modal from 'react-modal';
 import { useParams } from 'react-router-dom';
 import { Button } from 'flowbite-react';
 import '../App.css';
+import * as Yup from 'yup';
 
-
-
-
-
-
-// const customStyles = {
-//     content: {
-//         top: '50%',
-//         left: '50%',
-//         right: 'auto',
-//         bottom: 'auto',
-//         marginRight: '-50%',
-//         transform: 'translate(-50%, -50%)',
-//         // width: '90%', // Adjust width for mobile feel
-//         maxWidth: '100%', // Set a maximum width for larger screens
-//         // borderRadius: '8px', // Rounded corners
-//         // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
-//         backgroundColor: '#fff', // White background color
-//         padding: '2%',
-
-//         '@media (max-width: 768px)': {
-//             width: '90%',
-//             padding: '4%',
-//             height: '100% '
-//         },
-//         '@media (max-width: 480px)': {
-//             width: '100%',
-//             padding: '6%',
-//             height: '100% !important '
-//         },
-
-//     },
-
-// };
-
-// customStyles.content['@media (max-width: 640px)'] = {
-//     width: '95%', // Adjust width for mobile screens
-// };
 
 
 
@@ -69,17 +32,13 @@ const CreateInvoice = () => {
     function closeModal() {
         setIsOpen(false);
     }
-
-
-
-    // const [selectedRowsData, setSelectedRowsData] = useState([]);
-
     const [rowDetails] = useState({});
 
 
     const [searchTerm, setSearchTerm] = useState('');
     const [pageSize, setPageSize] = useState(10);
     const [showform, setShowform] = useState(false);
+    // const [hide, SetHide] = useState(true);
 
     console.log("this is row data:::::", rowDetails)
     // const [productidclick, setProductIdClick] = useState(2);
@@ -95,7 +54,7 @@ const CreateInvoice = () => {
     // const [getViewData] = useMutation(INVOICEES_TIMATOR);
 
 
-    const { loading: Viewloading, error: Viewerror, data: Viewdata, refetch:refetchcheck} = useQuery(YOUR_QUERY, {
+    const { loading: Viewloading, error: Viewerror, data: Viewdata, refetch: refetchcheck } = useQuery(YOUR_QUERY, {
         variables: {
             id: EditViewid
         }
@@ -121,10 +80,32 @@ const CreateInvoice = () => {
         if (formData && formData.chked_box_val) {
             const productIds = formData.chked_box_val.map(item => item.product_id);
             setSelectedProductIds(productIds);
+
+        //     const productQtyMap = {};
+        // formData.chked_box_val.forEach(item => {
+        //     productQtyMap[item.product_id] = item.product_qty;
+        // });
+        // setProductQty(productQtyMap);
+        const productQtyMap = {};
+        formData.chked_box_val.forEach(item => {
+            productQtyMap[item.product_id] = item.product_qty;
+        });
+        setProductQty(productQtyMap);
+
+
         }
+        
+       
     }, [formData, refetchcheck]);
-    
-    const [selectedProductIds, setSelectedProductIds] = useState(formData?.chked_box_val ||[]);
+
+    const [selectedProductIds, setSelectedProductIds] = useState(formData?.chked_box_val || []);
+
+    const validationSchema = Yup.object().shape({
+        FName: Yup.string().required('First Name is required'),
+        LName: Yup.string().required('Last Name is required'),
+        CAddress: Yup.string().required('Customer Address is required'),
+        CNumber: Yup.string().required('Customer Number is required').matches(/^[0-9]+$/, 'Must be only digits'),
+     });
 
     const formik = useFormik({
         initialValues: {
@@ -139,7 +120,7 @@ const CreateInvoice = () => {
             selectedProducts: formData?.chked_box_val || [],
 
         },
-
+        validationSchema,
         enableReinitialize: true,
         onSubmit: async (values) => {
             values.selectedProducts = selectedProductIds;
@@ -192,17 +173,22 @@ const CreateInvoice = () => {
 
     // const invoice_data = modalData?.invoIceEstimator?.invoice_estimator?.invoice_data;
     // console.log('hello', modalData?.invoIceEstimator?.invoice_estimator?.invoice_data);
-    const { error, data, refetch } = useQuery(GET_ALL_PRODUCT, {
+    const {  data,  refetch } = useQuery(GET_ALL_PRODUCT, {
         variables: {
             search: "",
             pageSize: pageSize,
             currentPage: currentPage,
         },
     });
+
+    // if(loading){
+    //     SetHide(false)
+    // }
+
     if (data) {
         console.log("this is filter data", data)
     }
-    if (error) return <p>Error: {error?.message}</p>;
+    // if (error)  {return <p>Error: {error?.message}</p>} 
 
     const products = data?.products?.items || [];
 
@@ -220,9 +206,7 @@ const CreateInvoice = () => {
         setCurrentPage(1)
         refetch({ search: searchTerm, pageSize: currentPage });
     };
-    // const products = data.products.items;
-
-    const handleProductSelection = (productId, productqty, selectedOption) => {
+       const handleProductSelection = (productId, productqty, selectedOption) => {
 
         if (selectedProductIds.includes(productId)) {
             setSelectedProductIds(selectedProductIds.filter(id => id !== productId));
@@ -362,6 +346,23 @@ const CreateInvoice = () => {
                                             value={formik?.values?.DiscountAmount} placeholder="Discount Amount" />
                                     </div>
                                     <div className="relative z-0 w-full mb-2 group">
+                                        <label for="CAddress" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Address:</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            id="CAddress"
+                                            name="CAddress"
+                                            type="text"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.CAddress} />
+                                        {formik.errors.CAddress && formik.touched.CAddress && (
+                                            <div className="text-red-600 text-xs">{formik.errors.CAddress}</div>
+                                        )}
+
+                                    </div>
+                                   </div>
+
+                                <div className="grid md:grid-cols-2 md:gap-6">
+                                   
+                                    <div className="relative z-0 w-full mb-2 group">
                                         <label for="DiscountType" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Discount Type</label>
                                         {/* <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required /> */}
                                         <select
@@ -375,7 +376,21 @@ const CreateInvoice = () => {
                                             <option key="percent" value="percent" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >Percentage</option>
                                         </select>
                                     </div>
+                                    <div className="relative z-0 w-full mb-2 group">
+                                        <label for="CNumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Number:</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            id="CNumber"
+                                            name="CNumber"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.CNumber}
+                                        />
+                                        {formik.errors.CNumber && formik.touched.CNumber && (
+                                            <div className="text-red-600 text-xs">{formik.errors.CNumber}</div>
+                                        )}
+
+                                    </div>
                                 </div>
+
 
                                 <div className="grid md:grid-cols-2 md:gap-6">
                                     <div className="relative z-0 w-full mb-2 group">
@@ -385,41 +400,12 @@ const CreateInvoice = () => {
                                             name="FName"
                                             type="text"
                                             onChange={formik.handleChange}
-                                            value={formik?.values?.FName} required />
-                                    </div>
-                                    <div className="relative z-0 w-full mb-2 group">
-                                        <label for="LName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name::</label>
-                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            id="LName"
-                                            name="LName"
-                                            type="text"
-                                            onChange={formik.handleChange}
-                                            value={formik?.values?.LName}
-                                            required />
+                                            value={formik?.values?.FName} />
+                                        {formik.errors.FName && formik.touched.FName && (
+                                            <div className="text-red-600 text-xs">{formik.errors.FName}</div>
+                                        )}
                                     </div>
 
-                                </div>
-                                <div className="grid md:grid-cols-2 md:gap-6">
-                                    <div className="relative z-0 w-full mb-2 group">
-                                        <label for="CAddress" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Address:</label>
-                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            id="CAddress"
-                                            name="CAddress"
-                                            type="text"
-                                            onChange={formik.handleChange}
-                                            value={formik?.values?.CAddress} required />
-                                    </div>
-                                    <div className="relative z-0 w-full mb-2 group">
-                                        <label for="CNumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Number:</label>
-                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            id="CNumber"
-                                            name="CNumber"
-                                            onChange={formik.handleChange}
-                                            value={formik?.values?.CNumber}
-                                            required />
-                                    </div>
-                                </div>
-                                <div className="grid md:grid-cols-2 md:gap-6">
                                     <div className="relative z-0 w-full mb-2 group">
                                         <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Email:</label>
                                         <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -429,6 +415,24 @@ const CreateInvoice = () => {
                                             onChange={formik.handleChange}
                                             value={formik?.values?.email} />
                                     </div>
+
+                                </div>
+                                <div className="grid md:grid-cols-2 md:gap-6">
+                                <div className="relative z-0 w-full mb-2 group">
+                                        <label for="LName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name:</label>
+                                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            id="LName"
+                                            name="LName"
+                                            type="text"
+                                            onChange={formik.handleChange}
+                                            value={formik?.values?.LName}
+                                        />
+                                        {formik.errors.LName && formik.touched.LName && (
+                                            <div className="text-red-600 text-xs">{formik.errors.LName}</div>
+                                        )}
+
+                                    </div>
+                                  
                                     <div className="relative z-0 w-full mb-2 group">
                                         <label for="Coupon" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Coupon Code:</label>
                                         <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -439,6 +443,7 @@ const CreateInvoice = () => {
                                             value={formik?.values?.Coupon} />
                                     </div>
                                 </div>
+                              
                             </div>
 
                         ) : ''
@@ -459,12 +464,6 @@ const CreateInvoice = () => {
                             <option value={10}>10</option>
                             <option value={20}>20</option>
                             <option value={30}>30</option>
-                            {/* <option value={40}>40</option>
-                            <option value={50}>50</option>
-                            <option value={100}>100</option>
-                            <option value={150}>150</option>
-                            <option value={170}>170</option>
-                            <option value={180}>200</option> */}
                             <option value={400}>All</option>
                         </select>
 
@@ -496,9 +495,6 @@ const CreateInvoice = () => {
                                         <th scope="col" className="px-6 py-3">
                                             Stock status
                                         </th>
-                                        {/* <th scope="col" className="px-6 py-3">
-                                        Quantity Avaliable
-                                        </th> */}
                                         <th scope="col" className="px-6 py-3">
                                             Fitting Charges
                                         </th>
@@ -509,7 +505,7 @@ const CreateInvoice = () => {
                                         <th scope="col" className="px-6 py-3">
                                             <input
                                                 type="checkbox"
-                                                onChange={() => handleProductSelection(product.id, selectedOption[product.id])}                                
+                                                onChange={() => handleProductSelection(product.id, selectedOption[product.id])}
 
                                                 checked={selectedProductIds.includes(product.id)}
                                             />
@@ -528,18 +524,24 @@ const CreateInvoice = () => {
                                                 type='number'
                                                 placeholder=''
                                                 className='w-12 text-center h-8 p-1'
-                                                onChange={(e) => {
-                                                    const updatedQty = [...productQty];
-                                                    updatedQty[product.id] = e.target.value;
-                                                    setProductQty(updatedQty);
+                                                value={productQty[product.id] || ''}
+                                                // onChange={(e) => {
+                                                //     const updatedQty = [...productQty];
+                                                //     updatedQty[product.id] = e.target.value;
+                                                //     setProductQty(updatedQty);
 
+                                                // }}
+                                                onChange={(e) => {
+                                                    const updatedQty = { ...productQty };
+                                                    const newValue = parseFloat(e.target.value); // Parse the input value to a float
+                                                    updatedQty[product.id] = isNaN(newValue) ? '' : newValue; // Set to '' if NaN, else set the parsed value
+                                                    setProductQty(updatedQty);
                                                 }}
+                                            
 
                                             />
 
                                         </th>
-
-
                                         <th scope="col" className="px-6 py-3">
                                             {product.price_range.minimum_price.regular_price.value}{' '}
                                             {product.price_range.minimum_price.regular_price.currency}
@@ -576,13 +578,11 @@ const CreateInvoice = () => {
                         </div>
                     </div>
 
-                    <div className='lg:hidden sm:block mb-5'>
+                    <div className='tableshowhide mb-5'>
                         <div className=" rid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {products.map(product => (
                                 <div key={product.id} className="bg-white shadow-md rounded-md p-4 mb-2">
                                     <div>
-
-
                                         <div className="flex items-center justify-between">
                                             <label htmlFor={`checkbox_${product.id}`} className="flex items-center text-xs mr-2">
                                                 <input
@@ -590,13 +590,8 @@ const CreateInvoice = () => {
                                                     id={`checkbox_${product.id}`}
                                                     className=" text-xs"
                                                     onChange={() => handleProductSelection(product.id, selectedOption[product.id])}
-                                                    checked={selectedProductIds.includes(product.id)}                                    
-                                                
+                                                    checked={selectedProductIds.includes(product.id)}
                                                 />
-
-                                                <div>
-                                                    {/* {formData?.chked_box_val} */}
-                                                </div>
                                             </label>
                                             <div className="flex-1">
                                                 <h3 className="text-xs font-semibold ">{product.name}</h3>
@@ -652,29 +647,45 @@ const CreateInvoice = () => {
                             ))}
                         </div>
                     </div>
-                    <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-2 p-2.5 sm-py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:text-xs" >Submit</button>
+
+                    {/* <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-2 p-2.5 sm-py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:text-xs" >Submit</button> */}
+
+                    <button type="submit"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-2 p-2.5 sm-py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:text-xs"
+                    onClick={() => {
+                        if (formik.isValid) {
+                            formik.handleSubmit();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }}>Submit</button>
+
                 </form>
                 <>
+                
+                    
+                            
+                                <div class="flex flex-col  mt-4 items-center">
 
+                                <span class="text-sm text-gray-700 dark:text-gray-400">
+                                    Current page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.current_page}</span>
+                                    {/* Total Page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.page_size}</span> */}
+                                    {''}  of <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.total_count}</span> Entries
+                                </span>
+
+                                {/* {console.log("productttttttttttttttt", data?.products?.total_count)} */}
+                                <div class="inline-flex mt-2 xs:mt-0">
+                                    <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page - 1) }} disabled={currentPage === 1} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 rounded-s dark:bg-gray-800 dark:hover:text-white">
+                                        Prev
+                                    </button>
+                                    <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page + 1) }} disabled={currentPage >= data?.products?.page_info?.total_pages} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 border-0 border-s border-gray-700 rounded-e  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ">
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            
+                
                     {/* {"producttttttttttttttttt", data} */}
-                    <div class="flex flex-col  mt-4 items-center">
-
-                        <span class="text-sm text-gray-700 dark:text-gray-400">
-                            Current page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.current_page}</span>
-                            {/* Total Page <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.page_info?.page_size}</span> */}
-                            {''}  of <span class="font-semibold text-gray-900 dark:text-white">{data?.products?.total_count}</span> Entries
-                        </span>
-
-                        {/* {console.log("productttttttttttttttt", data?.products?.total_count)} */}
-                        <div class="inline-flex mt-2 xs:mt-0">
-                            <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page - 1) }} disabled={currentPage === 1} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 rounded-s dark:bg-gray-800 dark:hover:text-white">
-                                Prev
-                            </button>
-                            <button onClick={() => { setCurrentPage(data?.products?.page_info?.current_page + 1) }} disabled={currentPage >= data?.products?.page_info?.total_pages} class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 border-0 border-s border-gray-700 rounded-e  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ">
-                                Next
-                            </button>
-                        </div>
-                    </div>
 
 
 

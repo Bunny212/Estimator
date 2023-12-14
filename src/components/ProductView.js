@@ -334,7 +334,7 @@ function ProductView() {
         <>
 
           {row.order_status === "Not Placed" ? (
-            <div className='flex flex-wrap'>
+            <div className='flex flex-wrap '>
               <div
                 onClick={() => {
                   ViewHandler(row.estimate_id);

@@ -27,7 +27,8 @@
   .rdt_TableRow {
     display: block !important;
     background-color: #fff !important;
-    padding: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
     width: '100%';
 
   }
@@ -48,6 +49,18 @@
    /* .widthtable{
     width: '50%' !important;
   } */
+  .tableshowhide{
+    display: block !important;
+
+  }
+
+  .mobile-card .text-sm:last-child {
+    width: 40%;
+}
+.rdt_TableCell{
+  display: block !important;
+}
+
 }
 
 .textcolor {
@@ -59,4 +72,8 @@
 }
 .Hiden-label {
   display: none ;
+}
+
+.tableshowhide{
+  display: none;
 }
