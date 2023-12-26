@@ -10,47 +10,8 @@ import '../App.css';
 
 
 
-// const customStyles = {
-//   content: {
-//     top: '50%',
-//     left: '50%',
-//     right: 'auto',
-//     bottom: 'auto',
-//     marginRight: '-50%',
-//     transform: 'translate(-50%, -50%)',
-//     maxWidth: '100%', // Set a maximum width for larger screens
-//     // borderRadius: '8px', // Rounded corners
-//     // boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for depth
-//     // backgroundColor: '#fff', // White background color
-//     // padding:'5%'
-//     padding:'2%'
-//   },
-
-// };
-
-// customStyles.content['@media (max-width: 640px)'] = {
-//   width: '100%', // Adjust width for mobile screens
-// };
 
 function ProductView() {
-
-
-  // const skeletonRows = Array.from({ length: 5 }).map((_, index) => (
-  //   <tr key={index}>
-  //     <td className="border-b border-gray-200">
-  //       <div className="animate-pulse flex space-x-4">
-  //         <div className="rounded-full bg-gray-300 h-12 w-12"></div>
-  //         <div className="flex-1 space-y-4 py-1">
-  //           <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-  //           <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-  //           <div className="h-4 bg-gray-300 rounded w-4/6"></div>
-  //         </div>
-  //       </div>
-  //     </td>
-  //   </tr>
-  // ));
-
-
 
 
   useEffect(() => {

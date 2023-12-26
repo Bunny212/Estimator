@@ -107,11 +107,6 @@ useEffect(() => {
   }
 }, [token]);
 
-
-
-
-
-
   return (
     <ApolloProvider client={client}>
       <RouterProvider router={router}>

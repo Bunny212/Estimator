@@ -197,14 +197,24 @@ const CreateInvoice = () => {
         setSearchTerm(term);
         // setCurrentPage(1)
         setCurrentPage(1)
-        refetch({ search: term });
+        if (term.trim() === '') {
+            // Empty search term scenario
+            setPageSize(10);
+            refetch({ search: '', pageSize: 10 });
+        } else {
+            // Non-empty search term scenario
+            setPageSize(400);
+            refetch({ search: term, pageSize: 400 });
+        }
+        refetch({ search: term, pageSize: pageSize});
+
     };
 
     const handlePageSizeChange = (event) => {
         const size = parseInt(event.target.value);
         setPageSize(size);
         setCurrentPage(1)
-        refetch({ search: searchTerm, pageSize: currentPage });
+        refetch({ search: searchTerm, pageSize: pageSize });
     };
        const handleProductSelection = (productId, productqty, selectedOption) => {
 
